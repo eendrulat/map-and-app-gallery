@@ -1,0 +1,464 @@
+﻿/*
+ | Version 10.1.1
+ | Copyright 2012 Esri
+ |
+ | Licensed under the Apache License, Version 2.0 (the "License");
+ | you may not use this file except in compliance with the License.
+ | You may obtain a copy of the License at
+ |
+ |    http://www.apache.org/licenses/LICENSE-2.0
+ |
+ | Unless required by applicable law or agreed to in writing, software
+ | distributed under the License is distributed on an "AS IS" BASIS,
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ | See the License for the specific language governing permissions and
+ | limitations under the License.
+ */
+/******************************* Customizable details *******************************/
+
+.startupBkgd {
+    background-image:url('startup_background.png');
+    background-position:center;
+    background-repeat:no-repeat;
+}
+.overallSite {  /* Page plus dialogs */
+    font-family: Verdana,Arial,sans-serif !important;
+    font-size: 12px !important;
+}
+textarea {  /* For multiline text boxes for Submit's description and Review's review;
+               needs to be specified separately from overallSite to work */
+    font-family: Verdana,Arial,sans-serif !important;
+    font-size: 12px !important;
+}
+
+#overallPage {  /* Page without dialogs */
+    /* Gradient:  see bottom of this file */
+    background: #ccddea;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#025798, #ccddea);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #025798, #ccddea);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#025798), to(#ccddea));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#025798', EndColorStr='#ccddea', GradientType=0);  /* MSIE */
+}
+.noJavaScriptMessage {
+    margin: 80px;
+    font-size: large;
+}
+
+/* Rounding of graphic boxes */
+.roundedMainFrame {
+    border-radius: 10px;
+    -moz-border-radius: 10px; /* Firefox 3.6 and earlier */
+    overflow: hidden;
+}
+.rounded {
+    border-radius: 8px;
+    -moz-border-radius: 8px; /* Firefox 3.6 and earlier */
+    overflow: hidden;
+}
+.roundedTop {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    -moz-border-top-left-radius: 8px;
+    -moz-border-top-right-radius: 8px;
+    overflow: hidden;
+}
+
+/* Shadowing */
+.shadow {
+    -moz-box-shadow: 3px 3px 3px #888888;
+    -webkit-box-shadow: 3px 3px 3px #888888;
+    box-shadow: 3px 3px 3px #888888;
+}
+
+/* Common title and column attributes */
+.titleBarTitle {
+    color: #fff;
+    font-size: 18px;
+}
+.sideColumn {
+    width: 220px;
+}
+.sideColumnBkgd {
+    background-color: #d9e6f0;
+}
+
+a:link {
+    color: #015698;
+    text-decoration: none;
+    border-width: 0px;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:visited {
+    color: #015698;
+    text-decoration: none;
+    border-width: 0px;
+}
+
+/* City name and page title banner */
+.banner {
+    height: 76px;
+    padding: 0px !important;
+    overflow: hidden;
+}
+.logo {
+    margin: 0 4px 0 0; /* top right bottom left */
+}
+.dj_gecko .logo {
+    margin: 0 8px 0 0; /* top right bottom left */
+}
+.titleSeparator {
+    position: absolute;
+    top: 32px;
+
+}
+.title {
+    position: absolute;
+    top: 32px;
+    color: #666;
+    font-size: 32px;
+    margin: 0 0 0 8px; /* top right bottom left */
+}
+
+/* Tab bar */
+#tabBar {
+    /* Gradient:  see bottom of this file */
+    background: #0d7cc2;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#1eb4fd, #02579b);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #1eb4fd, #02579b);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#1eb4fd), to(#02579b));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#1eb4fd', EndColorStr='#02579b', GradientType=0);  /* MSIE */
+}
+.tabBarCollapsed {
+    height: 36px;
+}
+.tabBarExpanded {
+    height: 144px;
+}
+#tabBarExpandedImageFrame {
+    width: 100%;
+    height: 108px;
+    overflow: hidden;
+    background: gray;
+}
+#tabBarExpandedImage {
+    height: 108px;
+}
+.tabBarTitle {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    width: 24.8%;  /* Divide tab bar into 4 parts, but must be a bit less than 25% because of the separator widths */
+}
+
+/* Home page */
+#homeMostPopularTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #0d7cc2;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#1eb4fd, #02579b);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #1eb4fd, #02579b);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#1eb4fd), to(#02579b));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#1eb4fd', EndColorStr='#02579b', GradientType=0);  /* MSIE */
+}
+#mostPopularList {
+    background-color: white;
+}
+.popularItem {
+    color: #000000;
+    padding: 8px 0px;
+    border-color: LightGray;
+    border-bottom-style: dotted;
+    cursor: pointer;
+}
+.popularItem:hover {
+    color: #015698;
+    text-decoration: underline;
+}
+
+#homeHighlightsFrame {
+    border: 1px solid #d9e6f0;
+}
+#homeHighlightsTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #2c562c;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#6e8b6e, #003300);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #6e8b6e, #003300);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#6e8b6e), to(#003300));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#6e8b6e', EndColorStr='#003300', GradientType=0);  /* MSIE */
+}
+.mostRecentThumbnailImgSelected {
+    border-color: #00bfff !important;
+}
+.mostRecentFocusImg {
+    border:2px solid black;
+}
+
+
+#homeWhatsNewTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #92930a;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#d1d31a, #686900);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #d1d31a, #686900);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#d1d31a), to(#686900));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d1d31a', EndColorStr='#686900', GradientType=0);  /* MSIE */
+}
+#homeStayConnectedFrame {
+    height: 82px;
+}
+#homeStayConnectedTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #7f2626;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#a15f5f, #690101);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #a15f5f, #690101);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#a15f5f), to(#690101));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#a15f5f', EndColorStr='#690101', GradientType=0);  /* MSIE */
+}
+
+/* Map Gallery page */
+#mapGalleryLeftCol {
+    /* Gradient:  see bottom of this file */
+    background: #1966a2;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#3f7eb1, #015698);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #3f7eb1, #015698);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#3f7eb1), to(#015698));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#3f7eb1', EndColorStr='#015698', GradientType=0);  /* MSIE */
+}
+#mapGalleryLeftColTitle {
+    color: #fff;
+    font-size: 18px
+}
+.mapGalleryLeftColEntry {
+    padding-top: 12px;
+}
+.mapGalleryLeftColCurrentEntry {
+    font-weight: bold;
+}
+.mapGalleryLeftColPotentialEntry {
+    cursor: pointer;
+}
+.mapGalleryLeftColPotentialEntry:hover {
+    text-decoration: underline;
+}
+#galleryCategories {
+    color: #fff;
+    font-size: 14px;
+    border-color: LightBlue;
+    border-top-style: dotted;
+}
+#galleryTypes {
+    color: #fff;
+    font-size: 14px;
+    border-color: LightBlue;
+    border-top-style: dotted;
+}
+
+.mapTileSize {
+    width: 250px;
+    height: 305px;
+}
+.mapTileTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #92930a;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#d1d31a, #686900);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #d1d31a, #686900);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#d1d31a), to(#686900));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d1d31a', EndColorStr='#686900', GradientType=0);  /* MSIE */
+}
+.mapTileTitle {
+    color: #fff;
+    font-size: 14px;
+}
+.mapTileImageFrame {
+    width: 210px;
+    height: 143px;
+    background-color: white;
+}
+.mapTileImage {
+    width: 200px;
+    height: 133px;
+}
+.mapTileAuthor {
+    font-weight: bold;
+}
+#galleryEmpty {
+    padding: 40px;
+    font-weight: bold;
+}
+
+/* Submit Your App page */
+#submissionLeftCol {
+    /* Gradient:  see bottom of this file */
+    background: #1966a2;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#3f7eb1, #015698);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #3f7eb1, #015698);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#3f7eb1), to(#015698));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#3f7eb1', EndColorStr='#015698', GradientType=0);  /* MSIE */
+}
+#submissionLeftColTitle {
+    color: #fff;
+    font-size: 18px;
+}
+.submissionLeftColSubtitle {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+.submissionLeftColContent {
+    color: #fff;
+    font-size: 14px;
+}
+#uploadedfileHint {
+    font-size:11px;
+}
+#submissionFormNotAvailable {
+    padding: 40px;
+}
+
+/* Support page */
+#aboutTitle {
+    color: #004e94 !important;
+    font-size: 22px;
+    font-weight: bold
+}
+.aboutParagraph {
+    line-height: 18px;
+}
+#supportLeftCol {
+    /* Gradient:  see bottom of this file */
+    background: #1966a2;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#3f7eb1, #015698);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #3f7eb1, #015698);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#3f7eb1), to(#015698));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#3f7eb1', EndColorStr='#015698', GradientType=0);  /* MSIE */
+}
+#supportTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #2c562c;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#6e8b6e, #003300);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #6e8b6e, #003300);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#6e8b6e), to(#003300));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#6e8b6e', EndColorStr='#003300', GradientType=0);  /* MSIE */
+}
+.supportSubtitle {
+    font-weight: bold;
+}
+#supportAdditionalContact {
+    /* Gradient:  see bottom of this file */
+    background: #7f2626;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#a15f5f, #690101);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #a15f5f, #690101);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#a15f5f), to(#690101));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#a15f5f', EndColorStr='#690101', GradientType=0);  /* MSIE */
+}
+#supportAdditionalContactTitle {
+    font-size: 16px;
+}
+
+/* Page footer */
+.footer {
+    color: #015698;
+}
+
+/* Details dialog */
+#detailsDialogFrame {
+    width: 1000px;
+    height: 800px;
+}
+#detailsLeftCol {
+    width: 180px;
+    /* Gradient:  see bottom of this file */
+    background: #1966a2;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#3f7eb1, #015698);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #3f7eb1, #015698);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#3f7eb1), to(#015698));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#3f7eb1', EndColorStr='#015698', GradientType=0);  /* MSIE */
+}
+.detailsLeftColTitles {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 15px 0 5px 0; /* top right bottom left */
+}
+.detailsLeftColEntries {
+    color: #fff;
+    font-size: 14px;
+    margin: 5px 0;  /* top+bottom right+left */
+}
+
+#detailsDialogTitleBar {
+    background: white;
+}
+#detailsDialogTitle {
+    color: #004e94;
+    font-size: 16px;
+    font-weight: bold
+}
+#detailsDialogDescription {
+    margin-top: 6px;
+    line-height: 18px;
+}
+#detailsDialogReviewsList {
+    line-height: 18px;
+}
+#detailsCenterColReviewTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #2c562c;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#6e8b6e, #003300);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #6e8b6e, #003300);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#6e8b6e), to(#003300));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#6e8b6e', EndColorStr='#003300', GradientType=0);  /* MSIE */
+}
+
+.detailsReviewDate {font-weight: bold;}
+.detailsReviewText {}
+
+#detailsRightCol {
+    width: 130px;
+}
+#detailsRightColRating {
+    height: 110px;
+}
+#detailsRightColRatingTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #2c562c;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#6e8b6e, #003300);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #6e8b6e, #003300);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#6e8b6e), to(#003300));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#6e8b6e', EndColorStr='#003300', GradientType=0);  /* MSIE */
+}
+#detailsRightColTryIt {
+    height: 90px;
+}
+#detailsRightColTryItTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #92930a;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#d1d31a, #686900);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #d1d31a, #686900);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#d1d31a), to(#686900));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d1d31a', EndColorStr='#686900', GradientType=0);  /* MSIE */
+}
+#detailsRightColSupportIt {
+    height: 100px;
+}
+#detailsRightColSupportItTitleBar {
+    /* Gradient:  see bottom of this file */
+    background: #7f2626;  /* fallback (Opera < 11.10) */
+    background-image: -o-linear-gradient(#a15f5f, #690101);  /* Opera >= 11.10 */
+    background: -moz-linear-gradient(top, #a15f5f, #690101);  /* Mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, from(#a15f5f), to(#690101));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#a15f5f', EndColorStr='#690101', GradientType=0);  /* MSIE */
+}
+
+/* Gradient algorithm for the page, for title bars, for the left navigation
+   thanks to http://blog.fakedarren.com/2010/01/cross-browser-css-gradients/
+   and http://www.puremango.co.uk/2010/04/css-gradient/;
+   Opara >= 11.10 from http://dev.opera.com/articles/view/css3-linear-gradients/
+   Each gradient contains five alternate implementations:
+        fallback (e.g., for Opera < 11.10)
+        Opera >= 11.10
+        Mozilla
+        Chrome, Safari
+        MSIE
+*/
+

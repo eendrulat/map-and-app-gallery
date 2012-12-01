@@ -1,0 +1,172 @@
+﻿/*
+ | Version 10.1.1
+ | Copyright 2012 Esri
+ |
+ | Licensed under the Apache License, Version 2.0 (the "License");
+ | you may not use this file except in compliance with the License.
+ | You may obtain a copy of the License at
+ |
+ |    http://www.apache.org/licenses/LICENSE-2.0
+ |
+ | Unless required by applicable law or agreed to in writing, software
+ | distributed under the License is distributed on an "AS IS" BASIS,
+ | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ | See the License for the specific language governing permissions and
+ | limitations under the License.
+ */
+/******************* Layout structural details--risky to customize ******************/
+
+html, body {height:100%;margin:0;overflow:hidden;padding:0;}
+ul {padding-left:15px;}
+li {padding-bottom:8px;}
+
+#overallPage {position:fixed;top:0px;left:0px;right:0px;bottom:0px;height:100%;}
+#mainContainer {height:100%;}
+.mainFrame {background-color:white !important;margin:5px;padding:10px !important;}
+.subpage {padding-top:8px;}
+
+/* Common attributes */
+.hidden {visibility:hidden;}
+.absent {display:none;}
+.transparent {opacity:0.0;filter:Alpha(opacity=0);}
+.opaque {opacity:1.0;filter:Alpha(opacity=1);}
+
+.fillParent {width:100%;height:100%;}
+.fullWidth {width:100%;}
+.fullHeight {height:100%;}
+.noPad {padding:0px;}
+.inset {padding:10px;}
+.insetSides {padding:0 10px;}
+.centered {text-align:center;}
+
+.absoluteContainer {position:relative;}
+
+.columnPadBottom {padding-bottom:8px;}
+.columnPadLeft {padding-left:8px;}
+.columnPadRight {padding-right:8px;}
+.columnPadTop {padding-top:8px;}
+.iconPadSides {padding-left:2px;padding-right:2px;}
+
+img {border:0px}
+.mostRecentThumbnailImg {border:4px solid white}
+
+/* City name and page title banner */
+.rightHeader {float:right;height:76px;}
+.searchBoxGroup {margin-top:26px;position:relative;}
+.searchBoxOverlapper {position:absolute;right:3px;}
+#widget_searchBox {width:18em;}
+.searchBoxIcon {width:22px;height:22px;vertical-align:middle;cursor:pointer;}
+#translateBox {position:absolute;top:23px;right:3px;}
+.logo {height:72px;}
+
+/* Tab bar */
+#tabBar {width:100%;padding:0px;height:36px !important;line-height:36px;overflow:hidden;}
+.tabBarTitle {display:inline-block;vertical-align:top;cursor:pointer;}
+
+/* Common title attributes */
+.titleBar {width:100%;height:36px !important;line-height:36px;overflow:hidden;}
+.titleBarTitle {margin-left:12px;display:inline-block;vertical-align:top;}
+
+/* Home page */
+#mostPopularList {position:absolute;top:44px;right:8px;bottom:8px;left:8px;overflow:auto;padding:8px;}
+
+#homeHighlightsFrame {margin:-2px;}
+#highlightsGallery {position:absolute;top:50px;right:15px;bottom:10px;left:15px;overflow:auto;}
+#newsfeedContainer {position:absolute;top:36px;left:0px;bottom:0px;right:0px;margin:8px;overflow:hidden;}
+.quarterGalleryThumbnail {width:100px;height:66px}
+.rotatorCursorFrame {width:25%;height:6px;vertical-align:top;font-size:0px}
+.rotatorFocusImageLimit {max-width:800px}
+.panelLoadingIndicator {position:absolute;left:10px;top:40px;z-index:10}
+
+/* Map Gallery page */
+#mapGalleryLeftColFrame {position:absolute;top:10px;right:10px;bottom:10px;left:10px;overflow:auto;}
+#mapGalleryLeftColTitle {;margin:10px 0;}
+
+#galleryCategories {margin:12px 0;}
+#galleryTypes {margin:16px 0;}
+
+/* Submit Your App page */
+#submissionLeftColFrame {position:absolute;top:10px;right:10px;bottom:10px;left:10px;overflow:auto;}
+#submissionLeftColTitle {margin:10px 0;}
+.submissionLeftColSubtitle {margin:20px 0 10px 0;}
+.submissionLeftColContent {margin:5px 0;}
+
+#submissionFormFrame {position:absolute;top:0px;right:0px;bottom:0px;left:0px;overflow:auto;}
+#submissionForm {border:1px solid #9f9f9f;width:99%;}
+#submissionFormTable {width:100%;}
+#thumbnail {height:32px;}
+#uploadedfileEchoFrame {margin-bottom:6px;background-color:lightgray;width:95%;height:22px;}
+#uploadedfileEcho {margin-left:4px;vertical-align:middle;}
+#uploadedfileHint {width:95%;}
+#uploadStatus {display:none;height:52px;}
+.absoluteOrigin {position:absolute;left:0px;top:0px;}
+
+/* Support page */
+#aboutTitle {display:inline-block;vertical-align:top;}
+#aboutFrame {position:absolute;left:0;right:0;top:28px;bottom:0px;overflow:auto;}
+.aboutParagraph {margin:10px 0;line-height:18px;}
+
+#supportFrame {position:absolute;top:36px;bottom:0px;width:200px;margin:10px;overflow:auto;}
+.supportSubtitle {margin-top:10px;margin-bottom:5px;}
+#supportAdditionalContactFrame {position:absolute;top:36px;bottom:0px;width:200px;margin:10px;overflow:auto;}
+
+/* Details dialog */
+#detailsDialogTitle {margin-left:0px;display:inline-block;vertical-align:top;}
+#detailsDialogCenterCol {overflow:hidden;height:100%;}
+.detailsDialogDescriptionFrame {position:absolute;left:0;right:0;top:32px;bottom:10px;overflow:auto;}
+.detailsDialogDescriptionParagraph {line-height:18px;}
+#detailsDialogReviews {position:absolute;top:36px;left:0px;bottom:0px;right:0px;margin:8px;overflow:auto;}
+#detailsDialogWriteReviewFrame {height:18px;margin:8px 0 0 0;cursor:pointer;}
+#detailsDialogWriteReviewLink {vertical-align:top;}
+#detailsDialogWriteReviewLink:hover {color:#015698;text-decoration:underline;}
+.detailsDialogReviewsListFrame {position:absolute;left:0;right:0;top:44px;bottom:0px;overflow:auto;}
+#reviewFormButtonFrame {text-align:center;width:130px;}
+#detailsDialogRatingSlider {width:100%;margin-top:10px;}
+
+/* Map Gallery item tiles */
+.mapTileFrame {float:left;overflow:hidden;}
+.mapTileSize {overflow:hidden;}
+.mapTileTitle {margin-left:12px;display:inline-block;vertical-align:top;}
+.mapTileImageFrame {margin:10px 20px;}
+.mapTileImage {margin:5px;}
+.mapTileAuthor {margin:0 10px 4px 10px;}
+.mapTileSummary {margin:0 10px;}
+.mapTileReadMore {position:absolute;bottom:0px;padding:4px;font-size:11px;color:#015698;text-decoration:none;border-width:0px;cursor:pointer;}
+.mapTileReadMore:hover {text-decoration:underline;}
+
+/* Page footer */
+.footer {background-color:transparent !important;margin:0 10px 5px 10px;height:22px;}
+.leftFooter {float:left;margin:3px;}
+.rightFooter {float:right;margin:3px;}
+
+/* Theme patches to get desired Search box */
+.claro .dijitContentPane {padding:0px;}
+.dj_gecko .claro .dijitContentPane {padding:0px;}
+.claro .dijitSplitContainer-child, .claro .dijitBorderContainer-child {border:0px solid #ffffff;}
+.claro .dijitTextBox {width:95%;}
+.dijitTextBox {border:1px solid #b5bcc7;vertical-align:middle !important;
+    border-radius:4px;
+    -moz-border-radius:4px; /* Firefox 3.6 and earlier */
+    /* Gradient:see bottom of this file */
+    background:#f1f1f1;  /* fallback (Opera < 11.10) */
+    background-image:-o-linear-gradient(#e9e9e9, #ffffff);  /* Opera >= 11.10 */
+    background:-moz-linear-gradient(top, #e9e9e9, #ffffff);  /* Mozilla */
+    background:-webkit-gradient(linear, left top, left bottom, from(#e9e9e9), to(#ffffff));  /* Chrome, Safari */
+    filter:progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#e9e9e9', EndColorStr='#ffffff', GradientType=0);  /* MSIE */
+}
+/*.dijitTextBox INPUT {float:left;}*/
+.dijitInputInner {background-color:transparent !important;border:0 none !important;margin-left:0 !important;margin-right:0 !important;padding-left:0 !important;padding-right:0 !important;vertical-align:middle !important;width:100% !important;}
+.dijitPlaceHolder {color:#aaaaaa;left:3px;position:absolute;top:1px;}
+
+/* Gradient algorithm for the page, for title bars, for the left navigation
+   thanks to http://blog.fakedarren.com/2010/01/cross-browser-css-gradients/
+   and http://www.puremango.co.uk/2010/04/css-gradient/;
+   Opara >= 11.10 from http://dev.opera.com/articles/view/css3-linear-gradients/
+   Each gradient contains five alternate implementations:
+        fallback (e.g., for Opera < 11.10)
+        Opera >= 11.10
+        Mozilla
+        Chrome, Safari
+        MSIE
+*/
+

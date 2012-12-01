@@ -1,0 +1,1827 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset=utf-8>
+    <!--
+     | Version 10.1.1
+     | Copyright 2012 Esri
+     |
+     | Licensed under the Apache License, Version 2.0 (the "License");
+     | you may not use this file except in compliance with the License.
+     | You may obtain a copy of the License at
+     |
+     |    http://www.apache.org/licenses/LICENSE-2.0
+     |
+     | Unless required by applicable law or agreed to in writing, software
+     | distributed under the License is distributed on an "AS IS" BASIS,
+     | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     | See the License for the specific language governing permissions and
+     | limitations under the License.
+    -->
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <title>Maps and Apps</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css"></link>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojox/widget/Portlet/Portlet.css"></link>
+    <link rel="stylesheet" href="configuration/styles.css"></link>
+    <link rel="stylesheet" href="modules/structural.css"></link>
+</head>
+<body id="pageBody" class="claro overallSite startupBkgd">
+
+<noscript>
+    <div class="noJavaScriptMessage">
+        <span>This site requires JavaScript.</span>
+    </div>
+</noscript>
+
+<!-- Create a frame that's impervious to Google Translate's shifting of the
+body. The Google Translate menu bar now stomps on the top of the page rather
+than shifting the page 40px off the bottom. -->
+<div id="overallPage" class="hidden transparent">
+
+    <!-- Normally-displayed content -->
+    <div id="mainContainer" data-dojo-type="dijit.layout.BorderContainer"
+        data-dojo-props="design:'headline',gutters:false">
+
+        <!-- Floating center area -->
+        <div class="mainFrame roundedMainFrame shadow" data-dojo-type="dijit.layout.BorderContainer"
+            data-dojo-props="region:'center',gutters:false">
+
+            <!-- Banner -->
+            <header>
+                <div class="banner" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top'">
+                    <a id="govtMain" target="_blank"><img id="logo" class="logo" src="configuration/logo.png" /></a>
+                    <img class="titleSeparator" src="graphics/separator.png" title="vertical separator line" />
+                    <span id="mainTitle" class="title">Maps</span>
+                    <div class="rightHeader">
+                        <div class="searchBoxGroup">
+                            <div class="searchBoxOverlapper">
+                                <div id="searchBox" data-dojo-type="dijit.form.TextBox"
+                                    data-dojo-props="placeHolder:'Search Gallery',intermediateChanges:true">
+                                </div>
+                            </div>
+                            <span class="searchBoxOverlapper" onclick="updateSearchTerm();">
+                                <img src="graphics/magnifier.png" class="searchBoxIcon" title="Search map gallery"/>
+                            </span>
+                            <div id="translateBox"><div id="google_translate_element"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content pages -->
+            <div id="contentPages" class="fullHeight noPad" data-dojo-type="dijit.layout.BorderContainer"
+                data-dojo-props="region:'center',design:'headline',gutters:false">
+
+                <!-- Subpage switcher (i.e., tab bar) -->
+                <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'top'">
+                    <nav>
+                        <div id="tabBarExpander" class="tabBarExpanded rounded">
+                            <div id="tabBar"><span title="Home" class="tabBarTitle" onclick="changeSubpage('Home',true)">Home</span><img src="graphics/separator.png" /><span title="Gallery" class="tabBarTitle" onclick="changeSubpage('Gallery',false)">Gallery</span><img src="graphics/separator.png" /><span title="Submit Your App" class="tabBarTitle" onclick="changeSubpage('SubmitApp',false)">Submit Your App</span><img src="graphics/separator.png" /><span title="About" class="tabBarTitle" onclick="changeSubpage('About',true)">About</span></div>
+                            <div id="tabBarExpandedImageFrame">
+                                <img id="tabBarExpandedImage" src="configuration/home_image.png" title="city view">
+                            </div>
+                        </div>
+                    </nav>
+                </div><!-- Subpage switcher (i.e., tab bar) -->
+
+                <!-- Subpages -->
+                <div data-dojo-type="dijit.layout.StackContainer"
+                    data-dojo-props="region:'center',id:'contentStack'">
+
+                    <!-- Home -->
+                    <div id="Home" data-dojo-type="dijit.layout.ContentPane"
+                        data-dojo-props="title:'Home'">
+                        <div class="subpage" data-dojo-type="dijit.layout.BorderContainer"
+                            data-dojo-props="design:'headline',gutters:false">
+
+                            <!-- Left column popularity list -->
+                            <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'left'">
+                                <div class="absoluteContainer sideColumn fullHeight noPad sideColumnBkgd rounded">
+                                    <div id="homeMostPopularTitleBar" class="titleBar roundedTop">
+                                        <span class="titleBarTitle">Most Popular</span>
+                                    </div>
+                                    <img id="homeMostPopularLoading" class="panelLoadingIndicator" src="graphics/loading.gif"/>
+                                    <div id="mostPopularList" class="hidden">
+                                        <div id="galleryMostPopular"></div>
+                                    </div>
+                                </div>
+                            </div><!-- Left column popularity list -->
+
+                            <!-- Center column of cycling highlight images -->
+                            <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'center'">
+                                <div class="columnPadLeft columnPadRight fullHeight noPad">
+                                    <div id="homeHighlightsFrame" class="absoluteContainer fullHeight noPad rounded">
+                                        <div id="homeHighlightsTitleBar" class="titleBar roundedTop">
+                                            <span class="titleBarTitle">Most Recent</span>
+                                        </div>
+                                        <img id="homeHighlightsLoading" class="panelLoadingIndicator" src="graphics/loading.gif"/>
+                                        <div id="highlightsGallery">
+                                            <div class="fullWidth centered">
+                                                <table class="fullWidth" cellspacing="4px" border="0px" cellpadding="0px">
+                                                    <tr id="rotatorThumbs"/>
+                                                    <tr id="rotatorFocus"/>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Center column of cycling highlight images -->
+
+                            <!-- Right column small stuff -->
+                            <div data-dojo-type="dijit.layout.ContentPane"
+                                data-dojo-props="region:'right'">
+                                <div class="sideColumn fullHeight noPad" data-dojo-type="dijit.layout.BorderContainer"
+                                    data-dojo-props="design:'headline',gutters:false">
+
+                                    <!-- What's New -->
+                                    <div data-dojo-type="dijit.layout.ContentPane"
+                                        data-dojo-props="region:'center'">
+                                        <div class="absoluteContainer sideColumnBkgd rounded fullHeight noPad">
+                                            <div id="homeWhatsNewTitleBar" class="titleBar roundedTop">
+                                                <span class="titleBarTitle">What's New</span>
+                                            </div>
+                                            <div id="newsfeedContainer"><div id="newsfeedPlaceholder"></div></div>
+                                        </div>
+                                    </div><!-- What's New -->
+
+                                    <!-- Stay Connected -->
+                                    <div data-dojo-type="dijit.layout.ContentPane"
+                                        data-dojo-props="region:'bottom'">
+                                        <div class="columnPadTop">
+                                            <div id="homeStayConnectedFrame" class="sideColumnBkgd rounded">
+                                                <div id="homeStayConnectedTitleBar" class="titleBar">
+                                                    <span class="titleBarTitle">Stay Connected</span>
+                                                </div>
+                                                <div class="fullHeight inset">
+                                                    <nav><span id="socialNavigation"></span></nav>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- Stay Connected -->
+
+                                </div>
+                            </div><!-- Right column small stuff -->
+
+                        </div>
+                    </div><!-- Home -->
+
+                    <!-- Gallery -->
+                    <div id="Gallery" data-dojo-type="dijit.layout.ContentPane"
+                        data-dojo-props="title:'Gallery'">
+                        <div class="subpage" data-dojo-type="dijit.layout.BorderContainer"
+                            data-dojo-props="design:'sidebar',gutters:false">
+
+                            <!-- Left column list of categories & types -->
+                            <div data-dojo-type="dijit.layout.ContentPane"
+                                data-dojo-props="region:'left'">
+                                <div class="fullHeight noPad sideColumnBkgd rounded">
+                                    <div id="mapGalleryLeftCol" class="absoluteContainer sideColumn fullHeight noPad rounded">
+                                        <div id="mapGalleryLeftColFrame" data-dojo-type="dijit.layout.ContentPane">
+                                            <div id="mapGalleryLeftColTitle">Gallery</div>
+                                            <div id="galleryCategories"></div>
+                                            <div id="galleryTypes"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center column display of the gallery as a set of tiles -->
+                            <div id="museum" data-dojo-type="dijit.layout.ContentPane"
+                                data-dojo-props="region:'center'">
+                                <div class="columnPadLeft fullHeight noPad">
+                                    <div class="fullHeight noPad">
+                                        <div id="gallery" class="fillParent" data-dojo-type="dijit.layout._LayoutWidget">
+                                            <div id="galleryLoading">
+                                                <strong>Loading Maps and Apps...</strong>
+                                                <img width="20px" height="20px" title="Animation for loading page"
+                                                    src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojox/image/resources/images/loading.gif"><br>
+                                            </div>
+                                            <div id="galleryEmpty" class="absent">No items were found</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Center column display of the gallery as a set of tiles -->
+
+                        </div>
+                    </div><!-- Gallery -->
+
+                    <!-- Submit Your App -->
+                    <div id="SubmitApp" data-dojo-type="dijit.layout.ContentPane"
+                        data-dojo-props="title:'Submit Your App'">
+                        <div class="subpage" data-dojo-type="dijit.layout.BorderContainer"
+                            data-dojo-props="design:'headline',gutters:false">
+                            <div class="fullHeight noPad" data-dojo-type="dijit.layout.SplitContainer"
+                                data-dojo-props="region:'center',orientation:'horizontal',splitter:'true'">
+
+                                <!-- Left column rules -->
+                                <div data-dojo-type="dijit.layout.ContentPane">
+                                    <div class="fullHeight noPad sideColumnBkgd rounded">
+                                        <div id="submissionLeftCol" class="absoluteContainer fullHeight noPad rounded">
+                                            <div id="submissionLeftColFrame" data-dojo-type="dijit.layout.ContentPane">
+                                                <div id="submissionLeftColTitle">Submit Your Application</div>
+
+                                                <div id="categories" class="submissionLeftColSubtitle">Submission Rules</div>
+                                                <div class="submissionLeftColContent">
+                                                    In order to be considered, each submission must include:
+                                                    <ol>
+                                                        <li>A link to the working software application</li>
+                                                        <li>A text-based description of the application</li>
+                                                        <li>A thumbnail image of the application</li>
+                                                    </ol>
+                                                </div>
+
+                                                <div id="types" class="submissionLeftColSubtitle">Additional Rules</div>
+                                                <div class="submissionLeftColContent">
+                                                    Submissions must also:
+                                                    <ol>
+                                                        <li>Be original software apps solely owned by the applicant</li>
+                                                        <li>Use at least one of the maps or datasets found in the Gallery</li>
+                                                        <li>Be free to the public, or have a clearly defined fee structure</li>
+                                                        <li>Recognize that the City reserves the right to restrict access to the Gallery</li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- Left column rules -->
+
+                                <!-- Right column submission form -->
+                                <div data-dojo-type="dijit.layout.ContentPane">
+                                    <div class="columnPadLeft fullHeight noPad">
+                                        <div class="absoluteContainer fullHeight noPad">
+                                            <div id="submissionFormFrame" data-dojo-type="dijit.layout.ContentPane">
+                                                <div id="submissionFormNotAvailable" class="absent">
+                                                At this time, the submission of maps and apps from the Opera, 64-bit Internet Explorer, or Internet Explorer &lt;8 browsers is not available.
+                                                </div>
+                                                <form class="fullWidth" dojoType="dijit.form.Form" id="submissionForm" jsId="submissionForm"
+                                                    enctype="multipart/form-data" method="post">
+                                                    <table id="submissionFormTable" cellspacing="10">
+                                                        <tr>
+                                                            <td>
+                                                                <label for="title">Application Name:</label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" data-dojo-type="dijit.form.TextBox"
+                                                                    data-dojo-props="id:'title',name:'title',trim:true,required:true,intermediateChanges:true">
+                                                                </input>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label for="accessInformation">Submitted By:</label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" data-dojo-type="dijit.form.TextBox"
+                                                                    data-dojo-props="id:'accessInformation',name:'accessInformation',trim:true,required:true,intermediateChanges:true">
+                                                                </input>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label for="description">Description:</label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" data-dojo-type="dijit.form.SimpleTextarea"
+                                                                    data-dojo-props="id:'description',name:'description',trim:true,required:true,intermediateChanges:true">
+                                                                </input>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label for="pcategory">Category:</label>
+                                                            </td>
+                                                            <td>
+                                                                <input id="pcategory">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label for="ptype">Type:</label>
+                                                            </td>
+                                                            <td>
+                                                                <input id="ptype">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label for="url">Try It URL:</label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" data-dojo-type="dijit.form.TextBox"
+                                                                    data-dojo-props="id:'url',name:'url',trim:true,required:true,intermediateChanges:true">
+                                                                </input>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label for="thumbnail">Thumbnail Image:</label>
+                                                            </td>
+                                                            <td>
+                                                                <input id="thumbnail" name="thumbnail" type="file"
+                                                                    dojoType="dojox.form.Uploader" label="Select an image file..."
+                                                                    url="UploadFile.ashx"
+                                                                    multiple="false" uploadOnSelect="false"/>
+                                                                <div id="uploadedfileEchoFrame">
+                                                                    <span id="uploadedfileEcho"></span>
+                                                                </div>
+                                                                <div id="uploadedfileHint">For best results, the image should be 200 pixels wide by 133 pixels high. Other sizes will be adjusted to fit. Acceptable image formats are: PNG, GIF and JPEG.</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div id="uploadStatus" class="absoluteContainer">
+                                                                    <img id="uploadingActive" class="absoluteOrigin absent" src="graphics/uploadActive.gif">
+                                                                    <div id="uploadingSuccessful" class="absoluteOrigin absent">
+                                                                        <img class="absoluteOrigin" src="graphics/upload.png">
+                                                                        <img class="absoluteOrigin" src="graphics/ok.png">
+                                                                    </div>
+                                                                    <div id="uploadingFailed" class="absoluteOrigin absent">
+                                                                        <img class="absoluteOrigin" src="graphics/upload.png">
+                                                                        <img class="absoluteOrigin" src="graphics/fail.png">
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <input id="item" name="item" value="" type="hidden" dojoType="dijit.form.TextBox"/>
+                                                                <input id="snippet" name="snippet" value="" type="hidden" dojoType="dijit.form.TextBox"/>
+                                                                <input id="type" name="type" value="Web Mapping Application" type="hidden" dojoType="dijit.form.TextBox"/>
+                                                                <input id="typeKeywords" name="typeKeywords" value="Ready To Use,Other" type="hidden" dojoType="dijit.form.TextBox"/>
+                                                                <input id="tags" name="tags" value="" type="hidden" dojoType="dijit.form.TextBox"/>
+                                                                <input id="licenseInfo" name="licenseInfo" type="hidden" dojoType="dijit.form.TextBox"/>
+                                                                <input id="text" name="text" value="" type="hidden" dojoType="dijit.form.TextBox"/>
+
+                                                                <button id="submitButton" value="Submit" type="submit" dojoType="dijit.form.Button">Submit form</button>
+                                                                <button id="resetButton" dojoType="dijit.form.Button" onclick="resetForm(true);">Reset form</button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- Right column submission form -->
+
+                            </div>
+                        </div>
+                    </div><!-- Submit Your App -->
+
+                    <!-- About -->
+                    <div id="About" data-dojo-type="dijit.layout.ContentPane"
+                        data-dojo-props="title:'About'">
+                        <div class="subpage" data-dojo-type="dijit.layout.BorderContainer"
+                            data-dojo-props="design:'headline',gutters:false">
+
+                            <!-- Left column is empty; provides visual balance -->
+                            <div data-dojo-type="dijit.layout.ContentPane"
+                                data-dojo-props="region:'left'">
+                                <div id="supportLeftCol" class="sideColumn fullHeight noPad rounded">
+                                </div>
+                            </div>
+
+                            <!-- Center column's About -->
+                            <div data-dojo-type="dijit.layout.ContentPane"
+                                data-dojo-props="region:'center'">
+                                <div class="columnPadLeft columnPadRight fullHeight">
+                                    <div class="fullHeight insetSides">
+                                        <div class="absoluteContainer fullHeight">
+                                            <div class="titleBar">
+                                                <span id="aboutTitle">About</span>
+                                            </div>
+                                            <div id="aboutFrame"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Center column's About -->
+
+                            <!-- Right column small stuff -->
+                            <div class="sideColumn fullHeight noPad" data-dojo-type="dijit.layout.SplitContainer"
+                                data-dojo-props="region:'right',orientation:'vertical',splitter:'true'">
+
+                                <!-- Support -->
+                                <div data-dojo-type="dijit.layout.ContentPane">
+                                    <div class="absoluteContainer fullHeight noPad sideColumnBkgd rounded">
+                                        <div id="supportTitleBar" class="titleBar roundedTop">
+                                            <span class="titleBarTitle">Support</span>
+                                        </div>
+                                        <div id="supportFrame"></div>
+                                    </div>
+                                </div><!-- Support -->
+
+                                <!-- Additional Contact Info -->
+                                <div data-dojo-type="dijit.layout.ContentPane">
+                                    <div class="absoluteContainer fullHeight noPad sideColumnBkgd rounded">
+                                        <div id="supportAdditionalContact" class="titleBar roundedTop">
+                                            <span id="supportAdditionalContactTitle" class="titleBarTitle">Additional Contact Info</span>
+                                        </div>
+                                        <div id="supportAdditionalContactFrame"></div>
+                                    </div>
+                                </div><!-- Additional Contact Info -->
+
+                            </div><!-- Right column small stuff -->
+
+                        </div>
+                    </div><!-- About -->
+
+                </div><!-- Subpages -->
+
+            </div><!-- Content pages -->
+        </div><!-- Floating center area -->
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'bottom'">
+                <nav><span id="leftFooterNavigation" class="leftFooter"></span></nav>
+                <nav><span id="rightFooterNavigation" class="rightFooter"></span></nav>
+            </div>
+        </footer><!-- Footer -->
+
+    </div><!-- Normally-displayed content -->
+
+</div>
+
+<!-- Dialogs; these are outside the overallPage <div> because Dojo is going to move them out anyway -->
+<!-- Gallery details dialog -->
+<div id="detailsDialog" data-dojo-type="dijit.Dialog" data-dojo-props="title:''" class="hidden">
+    <div id="detailsDialogFrame" data-dojo-type="dijit.layout.BorderContainer"
+        data-dojo-props="design:'sidebar',gutters:false">
+
+        <!-- Left column summary -->
+        <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region:'left'">
+            <div id="detailsLeftCol" class="sideColumn fullHeight noPad rounded">
+                <div class="fullHeight inset">
+
+                    <img id="detailsDialogImage" class="fullWidth">
+
+                    <div class="detailsLeftColTitles">Category:</div>
+                    <div id="detailsDialogCategory" class="detailsLeftColEntries"></div>
+
+                    <div class="detailsLeftColTitles">Type:</div>
+                    <div id="detailsDialogType" class="detailsLeftColEntries"></div>
+
+                    <div class="detailsLeftColTitles">Submitted By:</div>
+                    <div id="detailsDialogSubmittedBy" class="detailsLeftColEntries"></div>
+
+                </div>
+            </div>
+        </div><!-- Left column summary -->
+
+        <!-- Center image and reviews -->
+        <div class="fullHeight" data-dojo-type="dijit.layout.ContentPane"
+            data-dojo-props="region:'center'">
+            <div class="fullHeight insetSides">
+                <div class="fullHeight" data-dojo-type="dijit.layout.SplitContainer"
+                    data-dojo-props="orientation:'vertical',splitter:'true'">
+                    <!-- Description -->
+                    <div data-dojo-type="dijit.layout.ContentPane">
+                        <div class="fullHeight">
+                            <div class="absoluteContainer fullHeight">
+                                <div id="detailsDialogTitleBar" class="titleBar">
+                                    <span id="detailsDialogTitle"></span>
+                                </div>
+                                <div class="detailsDialogDescriptionFrame">
+                                    <div class="detailsDialogDescriptionParagraph">
+                                        <span id="detailsDialogDescription"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Description -->
+                    <!-- Reviews -->
+                    <div data-dojo-type="dijit.layout.ContentPane">
+                        <div class="fullHeight">
+                            <div class="absoluteContainer fullHeight sideColumnBkgd rounded">
+                                <div id="detailsCenterColReviewTitleBar" class="titleBar roundedTop">
+                                    <span class="titleBarTitle">Reviews</span>
+                                </div>
+                                <div id="detailsDialogReviews">
+                                    <div id="detailsDialogWriteReviewFrame" onclick="writeAReview();">
+                                        <img src="graphics/draw.gif" title="Write a review" />
+                                        <span id="detailsDialogWriteReviewLink">Write a review</span>
+                                    </div>
+                                    <hr />
+                                    <div class="detailsDialogReviewsListFrame">
+                                        <div id="detailsDialogReviewsList"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Reviews -->
+                </div>
+            </div>
+        </div><!-- Center image and reviews -->
+
+        <!-- Right column small stuff -->
+        <div id="detailsRightCol" data-dojo-type="dijit.layout.ContentPane"
+            data-dojo-props="region:'right'">
+
+            <!-- Rating -->
+            <div class="columnPadBottom">
+                <div id="detailsRightColRating" class="sideColumnBkgd rounded">
+                    <div id="detailsRightColRatingTitleBar" class="titleBar">
+                        <span class="titleBarTitle">Rating</span>
+                    </div>
+                    <div class="fullHeight inset">
+                        <img id="detailsDialogRatingImg" src="graphics/rating0.png" title="rating stars"><br />
+                        <div id="detailsDialogRatingSlider" dojoType="dijit.form.HorizontalSlider" value="0"
+                            minimum="0" maximum="5" discreteValues="6" intermediateChanges="true"
+                            showButtons="true" disabled="true">
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Rating -->
+
+            <!-- Try it -->
+            <div class="columnPadBottom">
+                <div id="detailsRightColTryIt" class="sideColumnBkgd rounded">
+                    <div id="detailsRightColTryItTitleBar" class="titleBar">
+                        <span class="titleBarTitle">Try it</span>
+                    </div>
+                    <div class="fullHeight inset">
+                        <div>
+                            <a id="detailsRightColTryItLink" title="Try it"
+                                href="mapps.html" target="_blank">Try it</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- Try it -->
+
+            <!-- Support it -->
+            <div class="columnPadBottom">
+                <div id="detailsRightColSupportIt" class="sideColumnBkgd rounded">
+                    <div id="detailsRightColSupportItTitleBar" class="titleBar">
+                        <span class="titleBarTitle">Support it</span>
+                    </div>
+                    <div class="fullHeight inset">
+                        <nav><span id="itemSocialNavigation"></span></nav>
+                    </div>
+                </div>
+            </div><!-- Support it -->
+
+        </div><!-- Right column small stuff -->
+
+    </div>
+</div><!-- Gallery details dialog -->
+
+<!-- Write a review dialog -->
+<div id="reviewDialog" data-dojo-type="dijit.Dialog" data-dojo-props="title:'Write a review'" class="hidden">
+    <div id="reviewFormFrame" data-dojo-type="dijit.layout.ContentPane">
+        <table cellspacing="10">
+            <tr>
+                <td style="width:205px">
+                    <input id='reviewDialogText' type="text" data-dojo-type="dijit.form.SimpleTextarea"
+                        data-dojo-props="intermediateChanges:true,trim:true,rows:'4',cols:'30',maxLength:140">
+                    </input>
+                </td>
+                <td id="reviewFormButtonFrame">
+                    <span id='reviewDialogDate' class='detailsReviewDate'></span><hr />
+                    <button id='reviewDialogSubmit' type='button' data-dojo-type="dijit.form.Button">Submit</button><br />
+                    <button id='reviewDialogCancel' type='button' data-dojo-type="dijit.form.Button">Cancel</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div><!-- Write a review dialog -->
+
+<script>
+    djConfig = {
+        parseOnLoad: true,
+        isDebug: false,
+        baseUrl: "./",
+        modulePaths: {local: "./"}
+    }
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js"></script>
+<script>
+    var currentPage = 'Home';
+    var configData = null;
+    var galleryData = null;
+    var galleryItems;
+    var numMapsAndApps = 0;
+    var currentCategory = null;
+    var currentType = null;
+    var currentTerm = null;
+    var currentDetailsId = null;
+    //var currentDetailsItem = null;//???
+    //var currentSumRatings = 0;    //???
+    //var currentNumRatings = 0;    //???
+    var configDependentInitReady = false;
+    var configIndependentInitReady = false;
+    var mostRecentItems = new Array();
+    var currentMostRecentItem = -1;
+
+    var disableThumbnailUpload = dojo.isOpera
+        || (dojo.isIE && (dojo.isIE < 8 || "x64" == window.navigator.cpuClass));
+
+    // Manage a "loading" indicator to hide dojo reworking of UI
+    // We'll pull this part of dojo in quickly, then get the rest
+    dojo.require("dojo.window");
+    dojo.addOnLoad(function(){
+        showLoading();
+        loadRestOfDojo();
+    });
+
+    function loadRestOfDojo(){
+        dojo.require("dijit.Dialog");
+        dojo.require("dijit.dijit");
+        dojo.require("dijit.form.Button");
+        dojo.require("dijit.form.ComboBox");
+        dojo.require("dijit.form.FilteringSelect");
+        dojo.require("dijit.form.Form");
+        dojo.require("dijit.form.Select");
+        dojo.require("dijit.form.SimpleTextarea");
+        dojo.require("dijit.form.Slider");
+        dojo.require("dijit.form.TextBox");
+        dojo.require("dijit.layout._LayoutWidget");
+        dojo.require("dijit.layout.BorderContainer");
+        dojo.require("dijit.layout.ContentPane");
+        dojo.require("dijit.layout.SplitContainer");
+        dojo.require("dijit.layout.StackContainer");
+        dojo.require("dojo.data.ItemFileReadStore");
+        dojo.require("dojox.form.Uploader");
+        if(dojo.isIE)
+        {
+            dojo.require("dojox.form.uploader.plugins.IFrame");
+        }
+        else
+        {
+            dojo.require("dojox.form.uploader.plugins.Flash");
+        }
+        dojo.require("dojox.widget.FeedPortlet");
+        dojo.require("dojox.widget.Portlet");
+        dojo.require("dojox.widget.rotator.Fade");
+
+        dojo.require("local.modules.ArcGISSearchStore");
+        dojo.require("local.modules.MapsAppsTile");
+
+        dojo.addOnLoad(onLoad);
+    }
+
+    function showLoading(){
+        // Set up a background and a loading gif in the center of the screen
+        // Adapted from http://acuriousanimal.com/blog/category/dojo/
+        var ws = dojo.window.getBox();
+        var loadingImgDiv = dojo.create("div",
+            {id:"loadingImgFrame",style:{width:ws.w+"px",height:ws.h+"px"}},
+            dojo.body());
+        var loadingImg = dojo.create("img",
+            {id:"loadingImg",src:"graphics/loading.gif",style:{visibility:"hidden",position:"absolute"}},
+            loadingImgDiv);
+        dojo.connect(loadingImg, "onload", function(){
+            var ps = dojo.position(loadingImg);
+            dojo.style(loadingImg, "top" , (ws.h/2-ps.h/2)+"px");
+            dojo.style(loadingImg, "left", (ws.w/2-ps.w/2)+"px");
+            dojo.style(loadingImg, "visibility", "visible");
+        });
+    }
+
+    function hideLoading() {
+        // This routine is called from two places: the configuration that
+        // depends on waiting for the config file to be loaded and the
+        // configuration that's independent of the config file. Both need
+        // to be done before we hide the loading.
+        if(configDependentInitReady && configIndependentInitReady)
+        {
+            // Bring up the page and hide the loading gif
+            dojo.removeClass("overallPage", "hidden");
+            dojo.fadeIn({
+                node: "overallPage",
+                duration: 1000,
+                onEnd: function(){
+                    dojo.removeClass("overallPage", "transparent");
+                    dojo.addClass("overallPage", "opaque");
+                    dojo.removeClass("pageBody", "startupBkgd");
+                    dojo.removeClass("detailsDialog", "hidden");
+                    dojo.removeClass("reviewDialog", "hidden");
+                }
+            }).play();
+            dojo.fadeOut({
+                node: "loadingImgFrame",
+                duration: 400,
+                onEnd: function(){
+                    dojo.addClass("loadingImgFrame", "absent");
+                }
+            }).play();
+        }
+    }
+
+    function onLoad() {
+        // Fetch the configuration information. We have two parallel tracks of initialization here:
+        // that which is dependent upon the config file and that which is independent
+
+        //---------- depends on config file ----------
+        dojo.require("local.configuration.config");
+        dojo.addOnLoad(function(){
+            configData = new local.configuration.config();
+
+            // Prep the cycle interval for the most recent items
+            if(!configData.mostRecentCycleInterval) configData.mostRecentCycleInterval = 3;
+            if(0.5 > configData.mostRecentCycleInterval) configData.mostRecentCycleInterval = 0.5;
+            configData.mostRecentCycleInterval *= 1000;
+
+            // Create the gallery data store
+            galleryData = new local.modules.ArcGISSearchStore({
+                groupId: configData.galleryGroupId
+            });
+
+            // Get the gallery data. We'll chain the three calls (for the Most Popular & Most Recent
+            // sections of the main page and for the Gallery page) so that we can use one fetch of
+            // data for all three. Otherwise, all three fetch calls are made before the data arrives
+            // and we end up making three fetches.
+            galleryData.fetch({
+                sort: [{attribute: "numViews", descending: true}],
+                start: 0, count: 7,
+                onComplete: function(items, request){
+                    // Most Popular
+                    showPopular(items, request);
+
+                    galleryData.fetch({
+                        sort: [{attribute: "modified", descending: true}],
+                        start: 0, count: 4,
+                        onComplete: function(items, request){
+                            // Most Recent
+                            showRecent(items, request);
+
+                            // Gallery page
+                            updateGallery(null, null, null);
+                        }
+                    });
+                }
+            });
+
+            // Fill in the custom text
+            dojo.byId("mainTitle").innerHTML = configData.mainTitle;
+            dijit.byId("searchBox").set("placeHolder", configData.searchBoxPrompt);
+            customizeLink("govtMain", configData.govtMainLabel, configData.govtMainLink);
+            addNavigation("leftFooterNavigation", configData.leftFooterNavigation);
+            addNavigation("rightFooterNavigation", configData.rightFooterNavigation);
+            addNavigation("socialNavigation", configData.socialNavigation);
+            addNavigation("itemSocialNavigation", configData.itemSocialNavigation);
+
+            if(configData.newsfeedLink && 0 < configData.newsfeedLink.length)
+            {
+                var newsFeed = new dojox.widget.ExpandableFeedPortlet({
+                    title: configData.govtDisplayName,
+                    id: 'newsPortlet',
+                    url: configData.newsfeedLink,
+                    maxresults: 20,
+                    local: false,
+                    closable: false,
+                    toggleable: false
+                }, "newsfeedPlaceholder");
+                newsFeed.load();
+                if(configData.govtDisplayName) {
+                    patchFeedTitle(newsFeed, configData.govtDisplayName);
+                }
+                dojo.style("newsPortlet", "visibility", "visible");
+                dojo.style("newsPortlet", "height", "100%");
+            }
+            else if(configData.newsItems)
+            {
+                var content = "<ul>";
+                dojo.forEach(configData.newsItems.items, function(item){
+                    content += "<li>" + item.title + "</li>";
+                });
+                content += "</ul>";
+                dojo.byId("newsfeedPlaceholder").innerHTML = content;
+            }
+
+            customizeLink("detailsFacebook", configData.govtFacebookLabel, configData.govtFacebookLink);
+            customizeLink("detailsTwitter", configData.govtTwitterLabel, configData.govtTwitterLink);
+
+
+            var categorySelector =
+                new dijit.form.FilteringSelect({
+                    id: "pcategory",
+                    store: new dojo.data.ItemFileReadStore({
+                            data: configData.appCategories
+                        }),
+                    searchAttr: "name",
+                    autoComplete: true,
+                    required: true,
+                    intermediateChanges: true,
+                    value: ""
+                },
+                "pcategory");
+            dojo.connect(dijit.byId("pcategory"), "onChange", updateSubmitResetButtons);
+
+            var typeSelector =
+                new dijit.form.FilteringSelect({
+                    id: "ptype",
+                    store: new dojo.data.ItemFileReadStore({
+                            data: configData.appTypes
+                        }),
+                    searchAttr: "name",
+                    autoComplete: true,
+                    required: true,
+                    intermediateChanges: true,
+                    value: ""
+                },
+                "ptype");
+            dojo.connect(dijit.byId("ptype"), "onChange", updateSubmitResetButtons);
+
+            dijit.byId("licenseInfo").set("value", configData.govtFormalName);
+
+            addAbout("aboutFrame", configData.about);
+
+            addContactInfo("supportFrame", configData.supportContact);
+            addContactInfo("supportAdditionalContactFrame", configData.additionalContact);
+
+            // Adjust display parameters
+            if(configData.displayRules.bannerImageStretchesToFit) dojo.style("tabBarExpandedImage", "width", "100%");
+
+            // Add the Google Translate widget if desired
+            if(null != configData.displayRules.alternateLanguages) {
+                var script = document.createElement("script");
+                script.src = "http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+                script.type = "text/javascript";
+                document.getElementsByTagName("head")[0].appendChild(script);
+            }
+
+            // Upload the image file when the form is submitted, then do the actual form submit
+            dojo.connect(dijit.byId("thumbnail"), "onBegin", function(event) {
+                // Try to block multiple submissions
+                dijit.byId("submitButton").set("disabled", true);
+                dijit.byId("resetButton").set("disabled", true);
+            });
+
+            dojo.connect(dijit.byId("thumbnail"), "onError", function(event) {
+                dojo.style("uploadingActive", "display", "none");
+                dojo.style("uploadingFailed", "display", "block");
+                resetForm(false);
+            });
+
+            dojo.connect(dijit.byId("thumbnail"), "onComplete", function(event) {
+                dojo.style("uploadStatus", "display", "block");
+                dojo.style("uploadingActive", "display", "block");
+
+                if(event && 0 < event.length && !event[0].error)
+                {
+                    // Submit the rest of the form once we're done with uploading the image.
+                    // Have to do it like this for IE; Firefox, Chrome, & Safari can handle it in parallel
+                    prepareFormForSubmission(event[0].name);
+
+                    var urlSuffix = "";
+                    if(dojo.isIE)
+                    {
+                        urlSuffix = "&unique=" + (new Date()).getTime();
+                    }
+
+                    // The parameters to pass to xhrPost, the form, how to handle it, and the callbacks.
+                    var xhrArgs = {
+                        form: dojo.byId("submissionForm"),
+                        url: "proxy.ashx?http://www.arcgis.com/sharing/content/users/" +
+                            configData.galleryOwner + "/addItem?f=json",
+                        handleAs: "text",
+                        accept: ["image/png","image/jpeg","image/gif"],
+                        headers: {"X-Requested-With": ""},  // avoid conversion from POST to OPTION; cf http://trac.dojotoolkit.org/changeset/20403
+                        load: function(data) {
+                            data = JSON.parse(data);
+                            if(data.success)
+                            {
+                                dojo.style("uploadingActive", "display", "none");
+                                dojo.style("uploadingSuccessful", "display", "block");
+                            }
+                            else
+                            {
+                                dojo.style("uploadingActive", "display", "none");
+                                dojo.style("uploadingFailed", "display", "block");
+                            }
+                        },
+                        error: function(error) {
+                            dojo.style("uploadingActive", "display", "none");
+                            dojo.style("uploadingFailed", "display", "block");
+                        }
+                    }
+                    // Call the asynchronous xhrPost
+                    var deferred = dojo.xhrPost(xhrArgs);
+                }
+                else
+                {
+                    dojo.style("uploadingActive", "display", "none");
+                    dojo.style("uploadingFailed", "display", "block");
+                }
+
+                resetForm(false);
+            });
+
+            // Show the site by hiding the loading background
+            configDependentInitReady = true;
+            hideLoading();
+        });
+
+
+        //---------- independent of config file ----------
+
+        // Watch for resizes so that we can change the dimensions of the gallery to keep it
+        // in a vertical column only
+        window.onresize = function(event) {
+            handleResize();
+        }
+
+        // Watch for typing in Search box
+        dojo.connect(dijit.byId("searchBox"), "onChange", updateSearchTerm);
+
+        // Links for write-a-review dialog
+        dijit.byId("reviewDialogSubmit").set("disabled", true);
+        dojo.connect(dijit.byId("reviewDialogText"), "onChange", updateReviewDialogButtons);
+        dojo.connect(dijit.byId("reviewDialogSubmit"), "onClick", submitReviewDialog);
+        dojo.connect(dijit.byId("reviewDialogCancel"), "onClick", hideReviewDialog);
+
+        // Activate the rating stars when the rating slider is changed
+        dojo.connect(dijit.byId("detailsDialogRatingSlider"), "onChange", function(newValue) {
+            dojo.byId("detailsDialogRatingImg").src = "graphics/rating" + newValue + ".png";
+        });
+
+        // Set initial conditions in submit form
+        if(disableThumbnailUpload)
+        {
+            dojo.addClass("submissionForm", "absent");
+            dojo.removeClass("submissionFormNotAvailable", "absent");
+        }
+
+        // Update the image file name after a selection of an image file
+        dojo.connect(dijit.byId("thumbnail"), "onChange", function(event) {
+            dojo.byId("uploadedfileEcho").innerHTML = event && 0 < event.length ? encodeURIComponent(event[0].name) : "";
+            updateSubmitResetButtons();
+        });
+
+        dojo.connect(dijit.byId("title"), "onChange", updateSubmitResetButtons);
+        dojo.connect(dijit.byId("accessInformation"), "onChange", updateSubmitResetButtons);
+        dojo.connect(dijit.byId("description"), "onChange", updateSubmitResetButtons);
+        dojo.connect(dijit.byId("url"), "onChange", updateSubmitResetButtons);
+        updateSubmitResetButtons();
+
+        // Prevent the details dialog from being dragged to get around a bug that prevents the close button
+        // from working on an iPad (http://bugs.dojotoolkit.org/ticket/13488)
+        dijit.byId("detailsDialog").draggable = false;
+
+        // Show the site by hiding the loading background
+        configIndependentInitReady = true;
+        hideLoading();
+    };
+
+    function patchFeedTitle(newsFeed, govtDisplayName)
+    {
+        var feedNode = newsFeed;
+        var title = govtDisplayName;
+        setTimeout(doPatchFeedTitle, 3000);
+        function doPatchFeedTitle()
+        {
+            if(newsFeed.isLoaded){
+                newsFeed.titleNode.innerHTML = govtDisplayName;
+            }
+        }
+    }
+
+    function customizeLink(id, label, link)
+    {
+        var item = dojo.byId(id);
+        if(item)
+        {
+            if(label && 0 < label.length)
+            {
+                item.title = label;
+                item.href = link;
+                if(0 == item.innerHTML.length) item.innerHTML = label;
+            }
+            else
+            {
+                dojo.style(item, "display", "none");
+            }
+        }
+    }
+
+    function addNavigation(id, navigationData)
+    {
+        var item = dojo.byId(id);
+        if(item)
+        {
+            var contents = navigationData.label;
+            var first = true;
+            var usingIcons = false;
+            dojo.forEach(navigationData.items, function(item){
+                if(!first && !usingIcons) contents += ' | ';
+                if(item.link && 0 < item.link.length)
+                {
+                    if(item.icon)
+                    {
+                        contents += '<a target="_blank" class="iconPadSides" title="' + item.name +
+                            '" href="' + item.link + '"><img border="0" src="' + item.icon + '"></a> ';
+                        usingIcons = true;
+                    }
+                    else
+                    {
+                        contents += '<a target="_blank" href="' + item.link + '">' + item.name + '</a> ';
+                    }
+                }
+                else
+                {
+                    contents += item.name;
+                }
+                first = false;
+            });
+            item.innerHTML = contents;
+        }
+    }
+
+    function addContactInfo(id, contactData)
+    {
+        var item = dojo.byId(id);
+        if(item)
+        {
+            var contents = "";
+            if(contactData.text && 0 < contactData.text.length) contents += '<div>' + contactData.text + '</div>';
+            if(contactData.emailAddr && contactData.emailLabel &&
+                0 < contactData.emailAddr.length && 0 < contactData.emailLabel.length)
+            {
+                contents += '<div class="supportSubtitle">Email:</div>' +
+                    '<div><a href="' + contactData.emailAddr + '">' + contactData.emailLabel + '</a></div>';
+            }
+            if(contactData.phone && 0 < contactData.phone.length)
+            {
+                contents += '<div class="supportSubtitle">Phone:</div>' +
+                    '<div>' + contactData.phone + '</div>';
+            }
+            item.innerHTML = contents;
+        }
+    }
+
+    function addAbout(id, aboutData)
+    {
+        var item = dojo.byId(id);
+        if(item)
+        {
+            var contents = "";
+            dojo.forEach(aboutData, function(paragraph){
+                contents += '<div class="aboutParagraph">' + paragraph.para + '</div>';
+            });
+            item.innerHTML = contents;
+        }
+    }
+
+    function googleTranslateElementInit() {
+        if(configData && null != configData.displayRules.alternateLanguages) {
+            var translateOptions = {
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            };
+            if(0 < configData.displayRules.alternateLanguages.length) {
+                translateOptions["includedLanguages"] = configData.displayRules.alternateLanguages;
+            }
+            new google.translate.TranslateElement(translateOptions, 'google_translate_element');
+        }
+    }
+
+    function updateSubmitResetButtons()
+    {
+        var itemIsEmpty = true;
+        var formIsEmpty = true;
+        var formIsFull = true;
+        var item;
+
+        itemIsEmpty = 0 == dijit.byId("title").value.length;
+        formIsEmpty = formIsEmpty && itemIsEmpty;
+        formIsFull = formIsFull && !itemIsEmpty;
+
+        itemIsEmpty = 0 == dijit.byId("accessInformation").value.length;
+        formIsEmpty = formIsEmpty && itemIsEmpty;
+        formIsFull = formIsFull && !itemIsEmpty;
+
+        itemIsEmpty = 0 == dijit.byId("description").value.length;
+        formIsEmpty = formIsEmpty && itemIsEmpty;
+        formIsFull = formIsFull && !itemIsEmpty;
+
+        itemIsEmpty = true;
+        item = dijit.byId("pcategory");
+        if(item) itemIsEmpty = 0 == item.value.length;
+        formIsEmpty = formIsEmpty && itemIsEmpty;
+        formIsFull = formIsFull && !itemIsEmpty;
+
+        itemIsEmpty = true;
+        item = dijit.byId("ptype");
+        if(item) itemIsEmpty = 0 == item.value.length;
+        formIsEmpty = formIsEmpty && itemIsEmpty;
+        formIsFull = formIsFull && !itemIsEmpty;
+
+        itemIsEmpty = 0 == dijit.byId("url").value.length;
+        formIsEmpty = formIsEmpty && itemIsEmpty;
+        formIsFull = formIsFull && !itemIsEmpty;
+
+        if(!disableThumbnailUpload)
+        {
+            itemIsEmpty = 0 == dojo.byId("uploadedfileEcho").innerHTML.length;
+            formIsEmpty = formIsEmpty && itemIsEmpty;
+            formIsFull = formIsFull && !itemIsEmpty;
+        }
+
+        dijit.byId("submitButton").set("disabled", !formIsFull);
+        dijit.byId("resetButton").set("disabled", formIsEmpty);
+
+        if(!formIsEmpty)
+        {
+            dojo.style("uploadStatus", "display", "none");
+            dojo.style("uploadingActive", "display", "none");
+            dojo.style("uploadingSuccessful", "display", "none");
+            dojo.style("uploadingFailed", "display", "none");
+        }
+    }
+
+    function resetForm(askFirst)
+    {
+        if(!askFirst || confirm('Press OK to clear the form'))
+        {
+            dijit.byId("submissionForm").reset();
+            dijit.byId("thumbnail").reset();
+            dojo.byId("uploadedfileEcho").innerHTML = "";
+
+            updateSubmitResetButtons();
+        }
+    }
+
+    // Populate the Most Popular list on the front page with the gallery's data
+    function showPopular(items, request)
+    {
+        if(items && items.length && 0 < items.length)
+        {
+            var list = "";
+            dojo.forEach(items, function(item) {
+                list += "<div class='popularItem' title='More information about "
+                    + item.title + "' onclick='showDetailsDialog(\"" + item.id + "\")'>" + item.title + "</div>";
+            });
+            dojo.byId("galleryMostPopular").innerHTML = list;
+            dojo.removeClass("mostPopularList", "hidden");
+            dojo.addClass("homeMostPopularLoading", "absent");
+        }
+    }
+
+    // Populate the Most Recent list on the front page with the gallery's data
+    function showRecent(items, request)
+    {
+        var rotatorThumbs = dojo.byId("rotatorThumbs");
+
+        if(items && items.length && 0 < items.length)
+        {
+            var rotatorFocusImgCell = dojo.create("td", {}, "rotatorFocus");
+            rotatorFocusImgCell.colSpan = "4";
+
+            for(var i = 0; i < 4 && i < items.length; ++i) {
+                mostRecentItems.push(items[i]);
+
+                // Create the thumbnail for this item
+                var newRotatorThumbCell = dojo.create("td", {}, rotatorThumbs);
+                var newRotatorThumb = dojo.create("img",
+                    {
+                        src:"proxy.ashx?" + items[i].thumbnail,
+                        title:items[i].title
+                    },
+                    newRotatorThumbCell
+                );
+                newRotatorThumb.onerrorHandle = dojo.connect(newRotatorThumb, "onerror", function(err){
+                    var affectedImage = err.currentTarget;
+                    dojo.disconnect(affectedImage.onerrorHandle);
+                    affectedImage.src = "graphics/missingThumbnail.png";
+                });
+                mostRecentItems[i].thumbImg = newRotatorThumb;
+
+                newRotatorThumb.position = i;
+                newRotatorThumb.style.cursor = "pointer";
+                dojo.addClass(newRotatorThumbCell, "noPad");
+                dojo.addClass(newRotatorThumb, "quarterGalleryThumbnail");
+                dojo.addClass(newRotatorThumb, "mostRecentThumbnailImg");
+
+                dojo.connect(newRotatorThumb, "onclick", function(mouseEvent){
+                    stopRotator();
+                    nextMostRecentItem(mouseEvent.currentTarget.position);
+                });
+                dojo.connect(newRotatorThumb, "onmouseover", function(mouseEvent){
+                    stopRotator();
+                });
+                dojo.connect(newRotatorThumb, "onmouseout", function(mouseEvent){
+                    startRotatorWithLag();
+                });
+
+                // Create the large focus view for this item
+                var rotatorFocusImg = dojo.create("img",
+                    {
+                        src: "proxy.ashx?" + items[i].fullsize,
+                        title: "More information about " + items[i].title
+                    }, rotatorFocusImgCell);
+                rotatorFocusImg.onerrorHandle = dojo.connect(rotatorFocusImg, "onerror", function(err){
+                    var affectedImage = err.currentTarget;
+                    dojo.disconnect(affectedImage.onerrorHandle);
+                    affectedImage.src = "graphics/missingMostRecent.png";
+                });
+                mostRecentItems[i].focusImg = rotatorFocusImg;
+
+                rotatorFocusImg.itemId = items[i].id;
+                rotatorFocusImg.style.cursor = "pointer";
+                dojo.addClass(rotatorFocusImg, "fullWidth");
+                dojo.addClass(rotatorFocusImg, "noPad");
+                dojo.addClass(rotatorFocusImg, "absent");
+                dojo.addClass(rotatorFocusImg, "rotatorFocusImageLimit");
+                dojo.addClass(rotatorFocusImg, "mostRecentFocusImg");
+
+                dojo.connect(rotatorFocusImg, "onclick", function(mouseEvent){
+                    stopRotator();
+                    showDetailsDialog(mouseEvent.currentTarget.itemId);
+                });
+                dojo.connect(rotatorFocusImg, "onmouseover", function(mouseEvent){
+                    stopRotator();
+                });
+                dojo.connect(rotatorFocusImg, "onmouseout", function(mouseEvent){
+                    startRotatorWithLag();
+                });
+            };
+
+            // Start the cycling thru the most-recent items
+            startRotator();
+
+            dojo.addClass("homeHighlightsLoading", "absent");
+        }
+    }
+
+    var rotatorTimer = null;
+    function startRotator()
+    {
+        nextMostRecentItem();
+        startRotatorWithLag();
+    }
+
+    function startRotatorWithLag()
+    {
+        if(null != rotatorTimer) clearTimeout(rotatorTimer);
+        rotatorTimer = setTimeout(startRotator, configData.mostRecentCycleInterval);
+    }
+
+    function stopRotator()
+    {
+        if(null != rotatorTimer) clearTimeout(rotatorTimer);
+        rotatorTimer = null;
+    }
+
+    function nextMostRecentItem(newMostRecentItem)
+    {
+        currentMostRecentItem = null != newMostRecentItem ? newMostRecentItem : currentMostRecentItem + 1;
+        if(mostRecentItems.length <= currentMostRecentItem) currentMostRecentItem = 0;
+
+        for(var i = 0; i < 4 && i < mostRecentItems.length; ++i) {
+            if(i == currentMostRecentItem) {
+                // Shift the cursor to the current item's thumbnail
+                dojo.addClass(mostRecentItems[i].thumbImg, "mostRecentThumbnailImgSelected");
+
+                // Show the current item's focus image
+                dojo.removeClass(mostRecentItems[i].focusImg, "absent");
+            } else {
+                // Hide the cursor for non-current items
+                dojo.removeClass(mostRecentItems[i].thumbImg, "mostRecentThumbnailImgSelected");
+
+                // Hide the focus image for non-current items
+                dojo.addClass(mostRecentItems[i].focusImg, "absent");
+            }
+        }
+    }
+
+    // Update the gallery tile display using the supplied search term
+    function updateSearchTerm(newValue)
+    {
+        // Switch to the gallery page if we're not already there
+        if('Gallery' != currentPage)
+        {
+            changeSubpage('Gallery', false);
+        }
+
+        // Update the current search term and the gallery
+        currentTerm = "" == newValue ? null : newValue;
+        updateGallery(currentCategory, currentType, currentTerm);
+    }
+
+    // Update the gallery tile display based on what category and type we prefer
+    function updateGallery(category, type, term)
+    {
+        // Show the "loading" message
+        dojo.removeClass("galleryLoading", "absent");
+        dojo.addClass("galleryEmpty", "absent");
+
+        if("All Categories" == category) category = null;
+        if("All Types" == type) type = null;
+        currentCategory = category;
+        currentType = type;
+
+        galleryData.fetch({
+            query: {category: currentCategory, type: currentType, term: currentTerm},
+            sort: [{attribute: "title"}],
+            onComplete: drawGallery
+        });
+    }
+
+    // Draw the map gallery as soon as we have both a dojo-ized UI and the gallery data
+    function drawGallery(items, request)
+    {
+        galleryItems = items;
+        numMapsAndApps = 0;
+        if(items && items.length && 0 < items.length)
+        {
+            // Build the gallery of maps & apps tiles
+            var gallery = dijit.byId('gallery');
+            gallery.destroyDescendants(false);
+
+            dojo.forEach(galleryItems, function(galleryItem) {
+
+                // Get the item's category & tag
+                var category = null;
+                if(0 < galleryItem.tags.length)
+                {
+                    category = galleryItem.tags[0].replace(/\x26amp\x3b/gi, "&");
+                }
+
+                var type = null;
+                if(1 < galleryItem.tags.length)
+                {
+                    type = galleryItem.tags[1].replace(/\x26amp\x3b/gi, "&");
+                }
+
+                // Add the tile if this item matches our category and type criteria
+                if(null == request.query.category || category == request.query.category)
+                {
+                    if(null == request.query.type || type == request.query.type)
+                    {
+                        var ok = null == request.query.term;
+                        if(!ok)
+                        {
+                            var searchPattern = new RegExp(request.query.term, "i");
+                            ok = searchPattern.test(galleryItem.title) ||
+                                searchPattern.test(galleryItem.accessInformation) ||
+                                searchPattern.test(galleryItem.snippet) ||
+                                searchPattern.test(galleryItem.description);
+                        }
+                        if(ok)
+                        {
+                            // If the tile does not have a url, see if it is a web map
+                            if(!galleryItem.url && "Web Map" == galleryItem.type)
+                            {
+                                if(configData && configData.webmapViewerUrl)
+                                {
+                                    galleryItem.url = configData.webmapViewerUrl + galleryItem.id;
+                                }
+                                else
+                                {
+                                    galleryItem.url = "http://www.arcgis.com/home/webmap/viewer.html?webmap=" + galleryItem.id;
+                                }
+                            }
+
+                            // Create the tile
+                            var mapapptile = new local.modules.MapsAppsTile({
+                                id: galleryItem.id,
+                                titleLine: galleryItem.title,
+                                author: galleryItem.accessInformation,
+                                shortDesc: galleryItem.snippet,
+                                readMoreOnClickHandler: "showDetailsDialog",
+                                tryItURL: galleryItem.url,
+                                thumbnailURL: "proxy.ashx?" + galleryItem.thumbnail
+                            });
+                            gallery.addChild(mapapptile);
+                            ++numMapsAndApps;
+                        }
+                    }
+                }
+            });
+        }
+
+        // Populate the map gallery's left panel. We do that here because one of the
+        // categories is highlighted as the current category and one of the types is
+        // highlighted as the current type.
+
+        // Populate the map gallery's left panel's categories
+        var categories = "";
+        if(null == request.query.category)
+        {
+            categories += currentCategoryOrTypeItem("All Categories");
+        }
+        else
+        {
+            categories += candidateCategory("All Categories");
+        }
+        dojo.forEach(configData.appCategories.items, function(categoryTag) {
+            if(null != request.query.category && categoryTag.name == request.query.category)
+            {
+                categories += currentCategoryOrTypeItem(categoryTag.name);
+            }
+            else
+            {
+                categories += candidateCategory(categoryTag.name);
+            }
+        });
+        dojo.byId("galleryCategories").innerHTML = categories;
+
+        // Populate the map gallery's left panel's types
+        var types = "";
+        if(null == request.query.type)
+        {
+            types += currentCategoryOrTypeItem("All Types");
+        }
+        else
+        {
+            types += candidateType("All Types");
+        }
+        dojo.forEach(configData.appTypes.items, function(typeTag) {
+            if(null != request.query.type && typeTag.name == request.query.type)
+            {
+                types += currentCategoryOrTypeItem(typeTag.name);
+            }
+            else
+            {
+                types += candidateType(typeTag.name);
+            }
+        });
+        dojo.byId("galleryTypes").innerHTML = types;
+
+        // Reshape the gallery page based on the number of results
+        handleResize();
+
+        // Remove the "loading" message
+        dojo.addClass("galleryLoading", "absent");
+
+        // Provide some feedback if nothing was found
+        if(0 == numMapsAndApps) dojo.removeClass("galleryEmpty", "absent");
+    }
+
+    function currentCategoryOrTypeItem(title)
+    {
+        return "<div class='mapGalleryLeftColEntry mapGalleryLeftColCurrentEntry'>" + title + "</div>";
+    }
+
+    function candidateCategory(title)
+    {
+        return "<div class='mapGalleryLeftColEntry mapGalleryLeftColPotentialEntry' onclick='updateGallery(\""
+            + title + "\", currentType, currentTerm);' title='Show "
+            + title + "'>" + title + "</div>";
+    }
+
+    function candidateType(title)
+    {
+        return "<div class='mapGalleryLeftColEntry mapGalleryLeftColPotentialEntry' onclick='updateGallery(currentCategory, \""
+            + title + "\", currentTerm);' title='Show "
+            + title + "'>" + title + "</div>";
+    }
+
+    function validateTagList(newTagList)
+    {
+        if(!newTagList || (2 != newTagList.length && 4 != newTagList.length)) return null;
+
+        var currentSumRatings = 0;
+        var currentNumRatings = 0;
+
+        if(4 == newTagList.length)
+        {
+            var candidateNumRatings = parseInt(newTagList[3]);
+            if(candidateNumRatings && 0 < candidateNumRatings) {
+                currentNumRatings = candidateNumRatings;
+
+                var candidateSumRatings = parseInt(newTagList[2]);
+                if(candidateSumRatings && 0 < candidateSumRatings) {
+                    currentSumRatings = candidateSumRatings;
+                } else {
+                    currentNumRatings = 0;
+                }
+            }
+        }
+
+        newTagList[2] = currentSumRatings;
+        newTagList[3] = currentNumRatings;
+
+        return newTagList;
+    }
+
+    // Show a details dialog for the specified gallery item
+    function showDetailsDialog(itemId)
+    {
+        dojo.forEach(galleryItems, function(galleryItem) {
+            if(galleryItem.id == itemId)
+            {
+                currentDetailsId = itemId;
+                dojo.byId("detailsDialogRatingImg").src = "graphics/rating0.png";
+
+                // Update the rating with the current arcgis.com value
+                dojo.xhrGet({
+                    url: "proxy.ashx?http://www.arcgis.com/sharing/content/items/" + itemId + "?f=json&unique=" + (new Date()).getTime(),
+                    handleAs: "json",
+                    timeout: 30000,  // ms
+                    load: function(data) {
+                        if(null != data)
+                        {
+                            var currentTagList = validateTagList(data.tags);
+                            if(currentTagList) {
+                                galleryItem.tags = currentTagList;
+
+                                var avgRating = 0 < galleryItem.tags[3] ?
+                                    Math.round(galleryItem.tags[2] / galleryItem.tags[3]) : 0;
+                                if(0 > avgRating) avgRating = 0;
+                                else if(5 < avgRating) avgRating = 5;
+                                dojo.byId("detailsDialogRatingImg").src = "graphics/rating" + avgRating + ".png";
+                                dijit.byId("detailsDialogRatingSlider").disabled = false;
+                            }
+                        }
+                    },
+                    error: function(text) {
+                        dijit.byId("detailsDialogRatingSlider").disabled = true;
+                    }
+                });
+
+
+                // Request the reviews
+                updateReviewsList(itemId);
+
+                // Customize the details dialog for this item
+                if(0 < galleryItem.tags.length)
+                {
+                    dojo.byId("detailsDialogCategory").innerHTML = galleryItem.tags[0];
+                    if(1 < galleryItem.tags.length)
+                    {
+                        dojo.byId("detailsDialogType").innerHTML = galleryItem.tags[1];
+                    }
+                }
+                dojo.byId("detailsDialogSubmittedBy").innerHTML = galleryItem.accessInformation;
+                dojo.byId("detailsDialogTitle").innerHTML = galleryItem.title;
+                dojo.byId("detailsDialogImage").src = "proxy.ashx?" + galleryItem.thumbnail;
+                dojo.byId("detailsDialogDescription").innerHTML = galleryItem.description;
+
+                var detailsRightColTryItLink = dojo.byId("detailsRightColTryItLink");
+                detailsRightColTryItLink.href = galleryItem.url;
+
+                // Submit a rating if the rating slider is non-zero when we close a details dialog
+                var detailsOnHideHandle = dojo.connect(dijit.byId("detailsDialog"), "onHide", function() {
+                    dojo.disconnect(detailsOnHideHandle);
+
+                    // Get the rating and reset the slider for future use
+                    var rating = dijit.byId("detailsDialogRatingSlider").value;
+                    dijit.byId("detailsDialogRatingSlider").reset();
+                    if(0 < rating)
+                    {
+                        // Cache a copy of the item id for the POST below
+                        var modifiedItemId = itemId;
+
+                        // Get a fresh copy of the ratings
+                        dojo.xhrGet({
+                            url: "proxy.ashx?http://www.arcgis.com/sharing/content/items/" + modifiedItemId
+                                + "?f=json&unique=" + (new Date()).getTime(),
+                            handleAs: "json",
+                            timeout: 30000,  // ms
+                            load: function(data) {
+                                if(null != data)
+                                {
+                                    // Add in this rating
+                                    var currentTagList = validateTagList(data.tags);
+                                    if(currentTagList) {
+                                        currentTagList[2] += rating;
+                                        ++currentTagList[3];
+
+                                        // And post the result
+                                        dojo.xhrPost({
+                                            url: "proxy.ashx?http://www.arcgis.com/sharing/content/users/" +
+                                                configData.galleryOwner + "/items/" + modifiedItemId +
+                                                "/update?f=json",
+                                            handleAs: "text",
+                                            headers: {"X-Requested-With": ""},  // avoid conversion from POST to OPTION;
+                                                                                // cf http://trac.dojotoolkit.org/changeset/20403
+                                            postData: "tags=" + encodeURIComponent(currentTagList.toString())
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    return true;  // we don't want to block the closing of the dialog
+                });
+
+                // Show the dialog
+                dijit.byId("detailsDialog").show();
+                return;
+            }
+        });
+    }
+
+    function updateReviewsList(itemId)
+    {
+        // Request the reviews
+        dojo.byId("detailsDialogReviewsList").innerHTML = "Searching...";
+        dojo.xhrGet({
+            url: "proxy.ashx?http://www.arcgis.com/sharing/content/items/" + itemId + "/comments?f=json&unique=" + (new Date()).getTime(),
+            handleAs: "json",
+            timeout: 30000,  // ms
+            load: function(data) {
+                var reviewsList = "";
+                if(null != data && null != data.comments && 0 < data.comments.length)
+                {
+                    data.comments.sort(function(a,b){
+                        return b.created - a.created;
+                    });
+                    dojo.forEach(data.comments, function(comment) {
+                        var d = new Date(comment.created);
+                        if(0 != reviewsList.length) reviewsList += "<br />";
+                        reviewsList +=
+                            "<span class='detailsReviewDate'>" +
+                            d.toDateString() + " - </span>" +
+                            "<span class='detailsReviewText'>" +
+                            comment.comment + "</span>";
+                    });
+                }
+                else
+                {
+                    reviewsList += "No reviews yet.";
+                }
+                dojo.byId("detailsDialogReviewsList").innerHTML = reviewsList;
+            },
+            error: function(text) {
+                alert(text);
+            }
+        });
+    }
+
+    function hideDetailsDialog()
+    {
+        // Hide the dialog
+        dijit.byId("detailsDialog").hide();
+    }
+
+    // Show a review dialog for the current gallery details item
+    function writeAReview()
+    {
+        // Set the current date
+        dojo.byId("reviewDialogDate").innerHTML = (new Date()).toDateString();
+
+        // Clear any remnant comment
+        dijit.byId("reviewDialogText").set("value", "");
+        updateReviewDialogButtons("");
+
+        // Show the dialog
+        dijit.byId("reviewDialog").show();
+    }
+
+    function updateReviewDialogButtons(newValue)
+    {
+        dijit.byId("reviewDialogSubmit").set("disabled", (0 == newValue.length));
+    }
+
+    function submitReviewDialog()
+    {
+        // We're done with getting the review
+        hideReviewDialog();
+
+        // Submit the comment
+        dojo.xhrPost({
+            url: "proxy.ashx?http://www.arcgis.com/sharing/content/items/" + currentDetailsId + "/addComment",
+            headers: {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"},
+            postData:
+                "f=json&comment=" + encodeURIComponent(dijit.byId("reviewDialogText").value),
+            handleAs: "json",
+            timeout: 60000,  // ms
+            load: function(data) {
+                // Update the reviews
+                updateReviewsList(currentDetailsId);
+            },
+            error: function(text) {
+                alert(text);
+            }
+        });
+    }
+
+    function hideReviewDialog()
+    {
+        // Hide the dialog
+        dijit.byId("reviewDialog").hide();
+    }
+
+    // Reshape the gallery page based on the number of results
+    function handleResize()
+    {
+        var gallery = dojo.byId("gallery");
+
+        // No items--just fill container
+        if(0 == numMapsAndApps)
+        {
+            gallery.style.height = "100%";
+            return;
+        }
+
+        // Set the map gallery to show as many whole columns as possible
+        var museum = dojo.byId("museum");
+        var currWidth = museum.style.width;
+        if(null == currWidth || "" == currWidth)
+        {
+            return;
+        }
+        currWidth = parseInt(currWidth);
+
+        var mapTileWidth = 250 + 14;
+        var numCols = Math.floor(currWidth / mapTileWidth);
+        if(0 == numCols)
+        {
+            numCols = 1;
+        }
+        var mapTileHeight = 305 + 14;
+        var desiredGalleryHeight = Math.ceil(numMapsAndApps / numCols) * mapTileHeight;
+
+        var currHeight = museum.style.height;
+        if(null != currHeight && "" != currHeight)
+        {
+            currHeight = parseInt(currHeight);
+            desiredGalleryHeight = Math.max(desiredGalleryHeight, currHeight);
+        }
+
+        gallery.style.height = desiredGalleryHeight + "px";
+    }
+
+    // Switch the main content under the navigation bar
+    function changeSubpage(newPage, showImage)
+    {
+        // Show the new subpage
+        currentPage = newPage;
+        dijit.byId('contentStack').selectChild(newPage);
+
+        // Show or hide the image that hangs below the menu bar
+        var tabBarExpander = dojo.byId("tabBarExpander");
+        if(showImage)
+        {
+            dojo.removeClass(tabBarExpander, "tabBarCollapsed");
+            dojo.addClass(tabBarExpander, "tabBarExpanded");
+        }
+        else
+        {
+            dojo.removeClass(tabBarExpander, "tabBarExpanded");
+            dojo.addClass(tabBarExpander, "tabBarCollapsed");
+        }
+        dijit.byId('contentPages').layout();
+        handleResize();
+    }
+
+    function prepareFormForSubmission(thumbnailImageFilename)
+    {
+        // Make a unique name for this item using a city-supplied base name
+        document.getElementById("item").value = configData.govtInternalVariableName + (new Date()).getTime();
+
+        // Generate our tags based on the combination of the Category and Type
+        var category = document.getElementById("pcategory").value;
+        var type = document.getElementById("ptype").value;
+        document.getElementById("tags").value = category + "," + type;
+
+        // The snippet is simply a shortened form of the description
+        document.getElementById("snippet").value = ellipsify(document.getElementById("description").value, 120);
+
+        // Add the thumbnail image's filename to the end of the description
+        document.getElementById("description").value += " [thumbnail filename:" + thumbnailImageFilename + "]";
+
+        return true;
+    }
+
+    function ellipsify(original, maxLength) {
+        // If string is within length restriction, simply return it
+        if(!original || original.length < maxLength+1)
+        {
+            return original;
+        }
+
+        // Otherwise, try to trim it on a space boundary
+        else if(" " == original[maxLength])
+        {
+            return original.substr(0, maxLength) + "...";
+        }
+        else
+        {
+            var iSpaceChar = original.lastIndexOf(" ", maxLength);
+            if(0 <= iSpaceChar)
+            {
+                return original.substr(0, iSpaceChar) + "...";
+            }
+            else
+            {
+                // No space characters within length restriction, so just
+                // cut the string
+                return original.substr(0, maxLength) + "...";
+            }
+        }
+    }
+
+    function textOnly(original)
+    {
+        var flattened = "";
+        if(original)
+        {
+            var iOpenTag = 0;
+            var iAfterCloseTag = 0;
+            do
+            {
+                iOpenTag = original.indexOf("<", iAfterCloseTag);
+                if(0 <= iOpenTag)
+                {
+                    flattened += original.substring(iAfterCloseTag, iOpenTag);
+                    iAfterCloseTag = original.indexOf(">", iOpenTag) + 1;
+                }
+            } while(0 <= iOpenTag);
+            flattened += original.substring(iAfterCloseTag);
+        }
+        return flattened;
+    }
+</script>
+</body>
+</html>

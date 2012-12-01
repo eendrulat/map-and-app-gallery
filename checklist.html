@@ -1,0 +1,863 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset=utf-8>
+    <!--
+     | Version 10.1.1
+     | Copyright 2012 Esri
+     |
+     | Licensed under the Apache License, Version 2.0 (the "License");
+     | you may not use this file except in compliance with the License.
+     | You may obtain a copy of the License at
+     |
+     |    http://www.apache.org/licenses/LICENSE-2.0
+     |
+     | Unless required by applicable law or agreed to in writing, software
+     | distributed under the License is distributed on an "AS IS" BASIS,
+     | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     | See the License for the specific language governing permissions and
+     | limitations under the License.
+    -->
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>Checklist for Configuring the Map and App Gallery Application</title>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dijit/themes/claro/claro.css"></link>
+    <link rel="stylesheet" href="configuration/styles.css"></link>
+    <style>
+        .overallSite {font-family:Verdana,Arial,sans-serif;font-size:smaller}
+        ul {margin:0px}
+        li {margin-top:4px;margin-bottom:4px}
+        .majorStep {margin-top:10px;margin-bottom:10px}
+        .path {font-size:smaller}
+        .sublist {list-style-type:disc}
+        .hidden {display:none}
+        .testResult {background-color:#ffffcc;padding:4px}
+        .resultsIcon {width:17px;height:13px;vertical-align:middle;margin-right:8px}
+        .resultsMsg {height:13px;vertical-align:middle}
+        .iconPadSides {padding-left:2px;padding-right:2px;}
+        .plugIn {margin:4px;padding:6px;border:1px solid black;background-color:#ffffee}
+        .emphasizeProblem {font-weight:bold;color:red}
+        .imageDisplay {width:600px;max-height:250px;overflow:auto}
+    </style>
+</head>
+<body class="overallSite">
+<noscript>
+    <div class="noJavaScriptMessage">
+        <span>This site requires JavaScript.</span>
+    </div>
+</noscript>
+<div id="loading">Loading...</div>
+
+<div id="mainDiv" class="hidden">
+    <h3>Checklist for Configuring the Map and App Gallery Application</h3>
+    <p>
+        <i>Results of tests run for you by this web page are <span class="testResult">highlighted</span>. Refresh this page to re-run the checklist's tests.</i>
+        <div class="testResult hidden" id="results0"><img id="resultsIcon0" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg0" class="resultsMsg"></span></div>
+    </p>
+
+    <hr/>
+    <ol>
+        <li class="majorStep">Catalog your Maps and Apps in ArcGIS Online</li>
+        <li class="majorStep">Configure the Map and App Gallery Application
+            <ol>
+                <li>Unzip the download</li>
+                <li>Logo, banner, and startup image
+                    <div class="testResult hidden" id="results19"><img id="resultsIcon19" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg19" class="resultsMsg"></span></div>
+                </li>
+                <li>Configuration file
+                    <div class="testResult hidden" id="results3"><img id="resultsIcon3" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg3" class="resultsMsg"></span></div>
+                </li>
+                <li>Title information
+                    <div class="testResult hidden" id="results8"><img id="resultsIcon8" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg8" class="resultsMsg"></span></div>
+                    <div class="testResult hidden" id="results9"><img id="resultsIcon9" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg9" class="resultsMsg"></span></div>
+                </li>
+                <li>Social media information
+                    <div class="testResult hidden" id="results10"><img id="resultsIcon10" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg10" class="resultsMsg"></span>
+                        <div id="socialNavPlaceholder" class="plugIn"></div>
+                    </div>
+                </li>
+                <li>Site navigation information
+                    <div class="testResult hidden" id="results11"><img id="resultsIcon11" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg11" class="resultsMsg"></span>
+                        <div id="leftNavPlaceholder" class="plugIn"></div>
+                    </div>
+                    <div class="testResult hidden" id="results12"><img id="resultsIcon12" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg12" class="resultsMsg"></span>
+                        <div id="rightNavPlaceholder" class="plugIn"></div>
+                    </div>
+                </li>
+                <li>News feed source
+                    <div class="testResult hidden" id="results13"><img id="resultsIcon13" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg13" class="resultsMsg"></span>
+                        <div class="plugIn"><div id="newsfeedPlaceholder"></div></div>
+                    </div>
+                </li>
+                <li>"About" page
+                    <div class="testResult hidden" id="results16"><img id="resultsIcon16" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg16" class="resultsMsg"></span>
+                        <div id="aboutPlaceholder" class="plugIn"></div>
+                        <div id="supportPlaceholder" class="plugIn"></div>
+                        <div id="additionalPlaceholder" class="plugIn"></div>
+                    </div>
+                </li>
+                <li>Language support
+                    <div class="testResult hidden" id="results17"><img id="resultsIcon17" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg17" class="resultsMsg"></span>
+                        <div class="plugIn"><div id="google_translate_element"></div></div>
+                    </div>
+                </li>
+            </ol>
+        </li>
+        <li class="majorStep">Publish the Map and App Gallery Application
+            <ol>
+                <li>Publish application</li>
+                <li>Define application pool
+                    <div class="testResult hidden" id="results1"><img id="resultsIcon1" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg1" class="resultsMsg"></span></div>
+                </li>
+                <li>Access credentials
+                    <div class="testResult hidden" id="results2"><img id="resultsIcon2" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg2" class="resultsMsg"></span></div>
+                </li>
+                <li>Checklist helper</li>
+                <li>Account information
+                    <div class="testResult hidden" id="results4"><img id="resultsIcon4" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg4" class="resultsMsg"></span></div>
+                    <div class="testResult hidden" id="results5"><img id="resultsIcon5" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg5" class="resultsMsg"></span></div>
+                    <div class="testResult hidden" id="results6"><img id="resultsIcon6" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg6" class="resultsMsg"></span></div>
+                    <div class="testResult hidden" id="results7"><img id="resultsIcon7" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg7" class="resultsMsg"></span></div>
+                    <div class="testResult hidden" id="results14"><img id="resultsIcon14" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg14" class="resultsMsg"></span></div>
+                    <div class="testResult hidden" id="results15"><img id="resultsIcon15" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg15" class="resultsMsg"></span></div>
+                </li>
+                <li>Upload permission
+                    <div class="testResult hidden" id="results18"><img id="resultsIcon18" class="resultsIcon" src="resources/loading.gif"/><span id="resultsMsg18" class="resultsMsg"></span></div>
+                </li>
+                <li>Begin using the application</li>
+            </ol>
+        </li>
+    </ol>
+    <hr/><br/>
+</div>
+
+<script>
+    djConfig = {
+        parseOnLoad: true,
+        isDebug: false,
+        cacheBust: (new Date()).getTime(),
+        baseUrl: "./",
+        modulePaths: {local: "./"}
+    }
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.1/dojo/dojo.xd.js"></script>
+<script>
+    var configData = null;
+    var gallery = [];
+    var appCategories = [];
+    var appTypes = [];
+
+    // Manage a "loading" indicator to hide dojo reworking of UI
+    // We'll pull this part of dojo in quickly, then get the rest
+    dojo.require("dojo.window");
+    dojo.addOnLoad(function(){
+        showLoading();
+        loadRestOfDojo();
+    });
+
+    function loadRestOfDojo(){
+        dojo.require("dojox.widget.FeedPortlet");
+        dojo.require("dojox.widget.Portlet");
+
+        dojo.addOnLoad(onLoad);
+    }
+
+    function showLoading(){
+    }
+
+    function hideLoading() {
+        dojo.addClass("loading", "hidden");
+        dojo.removeClass("mainDiv", "hidden");
+    }
+
+    function onLoad() {
+        hideLoading();
+
+        runTest1();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------//
+
+    function runTest1() {
+        showTest(1, "Check that site has been converted to an application");
+
+        dojo.xhrGet({
+            url: "checklist/testApp.ashx?unique=" + (new Date()).getTime(),
+            handleAs: "text",
+            timeout: 10000,  // ms
+            load: function(data) {
+                if(data && "OK" == data) {
+                    showResults(1, true);
+
+                    runTest2();
+                } else {
+                    showResults(1, false);
+                }
+            },
+            error: function(text, xhr) {
+                showResults(1, false);
+                showAddendum(1, xhr.xhr.statusText);
+            }
+        });
+    }
+
+    function runTest2() {
+        showTest(2, "Check that the site's proxy is able to get an item from ArcGIS.com");
+
+        var id = "74f7dedcb89c4bc3b714226849509501";
+        dojo.xhrGet({
+            url: "proxy.ashx?http://www.ArcGIS.com/sharing/content/items/" + id + "?f=json&unique="
+                + (new Date()).getTime(),
+            handleAs: "json",
+            timeout: 30000,  // ms
+            load: function(data) {
+                if(data && data.id && data.id == id) {
+                    showResults(2, true);
+
+                    runTest3();
+                } else if(data && data.error && data.error.message) {
+                    showResults(2, false);
+                    showAddendum(2, data.error.message);
+                    // Item '74f7dedcb89c4bc3b714226849509501i' does not exist or is inaccessible.:  bad item id
+                    // Specified output format 'json' not supported.:  bad url part after <dataUrlPrefix>
+                } else {
+                    showResults(2, false, purpose);
+                }
+            },
+            error: function(text, xhr) {
+                showResults(2, false);
+                showAddendum(2, xhr.xhr.statusText);
+                // Unsupported application URL:  pê "yourserver" for site
+                // Unsupported data URL:  mismatch with <dataUrlPrefix>
+                // Proxy configuration not available
+                // Authentication failed
+            }
+        });
+    }
+
+    function runTest3() {
+        showTest(3, "Check that the site's configuration file can be read");
+
+        try {
+            dojo.require("local.configuration.config");
+            dojo.addOnLoad(function(){
+                configData = new local.configuration.config();
+
+                if(!configData) {
+                    showResults(3, false);
+                } else {
+                    showResults(3, true);
+
+                    runTest4();
+                }
+            });
+        }catch(err){
+            showResults(3, false);
+            showAddendum(3, err);
+            showTip(3, "This error can also occur if the configuration file has a JavaScript error such as a missing commas, mismatching parentheses or brackets, or an unclosed text string.");
+        }
+    }
+
+    function runTest4() {
+        showTest(4, "Check that the account name can be read");
+
+        var owner = configData.galleryOwner;
+        if(null === owner || 0 == owner.length || "yourEsriGlobalID" == owner) {
+            showResults(4, false);
+        } else {
+            showResults(4, true);
+
+            runTest5();
+        }
+    }
+
+    function runTest5() {
+        showTest(5, "Get the account's groups from ArcGIS.com");
+
+        var owner = configData.galleryOwner;
+        dojo.xhrGet({
+            url: "proxy.ashx?http://www.ArcGIS.com/sharing/community/groups?q=owner:" + owner + "&f=json&num=100",
+            handleAs: "json",
+            timeout: 30000,  // ms
+            load: function(data) {
+                if(data && data.results) {
+                    if(0 == data.results.length)
+                    {
+                        showResults(5, false);
+                        showAddendum(5, "No groups were found for " + owner);
+                    }
+                    else
+                    {
+                        showResults(5, true);
+                        var content = "<ul>";
+                        dojo.forEach(data.results, function(group){
+                            content += '<li>Group "<u>' + group.title + '</u>"<br />';
+                            if(group.snippet) content += group.snippet + '<br />';
+                            else if(group.description) content += group.description + '<br />';
+                            content += '<i>public?</i> ' + group.isPublic + '<br />';
+                            content += '<i>group id:</i> "' + group.id + '"</li>';
+                        });
+                        content += "</ul>";
+                        showAddendum(5, content);
+
+                        runTest6();
+                    }
+                } else if(data && data.error && data.error.message) {
+                    showResults(5, false);
+                    showAddendum(5, data.error.message);
+                } else {
+                    showResults(5, false);
+                }
+            },
+            error: function(text, xhr) {
+                showResults(5, false);
+                showAddendum(5, xhr.xhr.statusText);
+            }
+        });
+    }
+
+    function runTest6() {
+        showTest(6, "Check that the group ID can be read");
+
+        var groupId = configData.galleryGroupId;
+        if(null === groupId || 32 != groupId.length || "yourArcGIS.comGroupID" == groupId) {
+            showResults(6, false);
+        } else {
+            showResults(6, true);
+
+            runTest7();
+        }
+    }
+
+    function runTest7() {
+        showTest(7, "Get gallery group's items from ArcGIS.com");
+
+        var groupId = configData.galleryGroupId;
+        // Post the query so that we can use a proxy
+        dojo.xhrPost({
+            url: "proxy.ashx?http://www.ArcGIS.com/sharing/search",
+            postData: "q=group:" + groupId + "&start=0&num=200&f=json",
+            handleAs: "json",
+            timeout: 40000,  // ms
+            load: function(data) {
+                if(data && data.results) {
+                    if(0 == data.results.length)
+                    {
+                        showResults(7, false);
+                        showAddendum(7, "No items were found for group " + groupId);
+                    }
+                    else
+                    {
+                        showResults(7, true);
+                        var content = "<ul><li>" + data.results.length + " items were found for group " + groupId;
+                        content += "<ol>";
+                        dojo.forEach(data.results, function(item){
+                            content += '<li><a href="' + item.url + '" target="_blank"><img width="50" height="33" src="proxy.ashx?http://www.arcgis.com/sharing/content/items/'
+                                + item.id + '/info/' + item.thumbnail + '"/></a> "' + item.title + '"</li>';
+                            gallery.push(item);
+                        });
+                        content += "</ol></li></ul>";
+                        showAddendum(7, content);
+
+                        runTest8();
+                    }
+                } else if(data && data.error && data.error.message) {
+                    showResults(7, false);
+                    showAddendum(7, data.error.message);
+                } else {
+                    showResults(7, false);
+                }
+            },
+            error: function(text, xhr) {
+                showResults(7, false, xhr.xhr.statusText);
+            }
+        });
+    }
+
+    function runTest8() {
+        showTest(8, "Check that the government name fields can be read");
+
+        var govtDisplayName = configData.govtDisplayName;
+        var govtFormalName = configData.govtFormalName;
+        var govtInternalVariableName = configData.govtInternalVariableName;
+        var beginWithLetterPattern = /[a-z]/i;
+        var containsWhitespacePattern = /\s/g;
+        if((govtDisplayName && 0 == govtDisplayName.length)
+           || null === govtFormalName || 0 == govtFormalName.length
+           || null === govtInternalVariableName || 0 == govtInternalVariableName.length) {
+            showResults(8, false);
+        } else if(!beginWithLetterPattern.test(govtInternalVariableName.substr(0,1))
+            || containsWhitespacePattern.test(govtInternalVariableName)) {
+            showResults(8, false);
+            showTip(8, "Insure that the govtInternalVariableName begins with a letter and only contains letters and digits");
+        } else {
+            showResults(8, true);
+            var content = "<ul>";
+            content += '<li>govtDisplayName: "' + govtDisplayName + '"</li>';
+            content += '<li>govtFormalName: "' + govtFormalName + '"</li>';
+            content += '<li>govtInternalVariableName: "' + govtInternalVariableName + '"</li>';
+            content += "</ul>";
+            showAddendum(8, content);
+
+            runTest9();
+        }
+    }
+
+    function runTest9() {
+        showTest(9, "Check that the government web site URL and logo tooltip fields can be read");
+
+        var govtMainLabel = configData.govtMainLabel;
+        var govtMainLink = configData.govtMainLink;
+        if(null === govtMainLabel || 0 == govtMainLabel.length || null === govtMainLink || 0 == govtMainLink.length) {
+            showResults(9, false);
+        } else {
+            showResults(9, true);
+            var content = "<ul>";
+            content += '<li>govtMainLabel: "' + govtMainLabel + '"</li>';
+            content += '<li>govtMainLink: "' + govtMainLink + '"</li>';
+            content += '<li>logo.png with tooltip and hyperlink: <a href="'
+                + configData.govtMainLink + '" title="' + configData.govtMainLabel
+                + '" target="_blank"><img src="configuration/logo.png"/></a></li>';
+            content += "</ul>";
+            showAddendum(9, content);
+
+            runTest10();
+        }
+    }
+
+    function runTest10() {
+        showTest(10, "Check that the social media fields can be read");
+
+        if(testNavigation(10, configData.socialNavigation, "socialNavPlaceholder")) runTest11();
+    }
+
+    function runTest11() {
+        showTest(11, "Check that the left-side site navigation fields can be read");
+
+        if(testNavigation(11, configData.leftFooterNavigation, "leftNavPlaceholder")) runTest12();
+    }
+
+    function runTest12() {
+        showTest(12, "Check that the right-side site navigation fields can be read");
+
+        if(testNavigation(12, configData.rightFooterNavigation, "rightNavPlaceholder")) runTest13();
+    }
+
+    function runTest13() {
+        showTest(13, "Check that the news feed source fields can be read");
+
+        if(configData.newsfeedLink && 0 < configData.newsfeedLink.length) {
+            var newsFeed = new dojox.widget.ExpandableFeedPortlet({
+                title: configData.govtDisplayName,
+                id: 'newsPortlet',
+                url: configData.newsfeedLink,
+                maxresults: 20,
+                local: false,
+                closable: false,
+                toggleable: false
+            }, "newsfeedPlaceholder");
+            newsFeed.load();
+            if(configData.govtDisplayName) {
+                patchFeedTitle(newsFeed, configData.govtDisplayName);
+            }
+            dojo.style("newsPortlet", "visibility", "visible");
+        } else if(configData.newsItems) {
+            var content = "<ul>";
+            dojo.forEach(configData.newsItems.items, function(item){
+                content += "<li>" + item.title + "</li>";
+            });
+            content += "</ul>";
+            dojo.byId("newsfeedPlaceholder").innerHTML = content;
+        } else {
+            showAddendum(13, "No news feed has been configured for this site");
+        }
+
+        showResults(13, true);
+        runTest14();
+    }
+
+    function runTest14() {
+        showTest(14, "Check that the gallery categories and types fields can be read");
+
+        var ok = true;
+        var content = "<ul>";
+
+        if(!configData.appCategories) {
+            ok = false;
+            showAddendum(14, "appCategories structure is missing");
+        }
+        if(ok && !(configData.appCategories.identifier && "name" == configData.appCategories.identifier)) {
+            ok = false;
+            showAddendum(14, "appCategories.identifier must be set to \"name\"");
+        }
+        if(ok && !(configData.appCategories.label && "name" == configData.appCategories.label)) {
+            ok = false;
+            showAddendum(14, "appCategories.label must be set to \"name\"");
+        }
+        if(ok && !(configData.appCategories.items && 0 < configData.appCategories.items.length)) {
+            ok = false;
+            showAddendum(14, "appCategories.items must contain at least one category");
+        }
+        if(ok) {
+            dojo.forEach(configData.appCategories.items, function(appCategory){
+                if(appCategory.name) {
+                    appCategories.push(appCategory.name);
+                } else {
+                    if(ok) showAddendum(14, "Category is missing a \"name\": value definition");
+                    ok = false;
+                }
+            });
+        }
+        content += "<li>Categories<ul>";
+        dojo.forEach(appCategories, function(appCategory){
+            content += "<li>" + appCategory + "</li>";
+        });
+        content += "</ul></li>";
+
+        if(!configData.appTypes) {
+            ok = false;
+            showAddendum(14, "appTypes structure is missing");
+        }
+        if(ok && !(configData.appTypes.identifier && "name" == configData.appTypes.identifier)) {
+            ok = false;
+            showAddendum(14, "appTypes.identifier must be set to \"name\"");
+        }
+        if(ok && !(configData.appTypes.label && "name" == configData.appTypes.label)) {
+            ok = false;
+            showAddendum(14, "appTypes.label must be set to \"name\"");
+        }
+        if(ok && !(configData.appTypes.items && 0 < configData.appTypes.items.length)) {
+            ok = false;
+            showAddendum(14, "appTypes.items must contain at least one category");
+        }
+        if(ok) {
+            dojo.forEach(configData.appTypes.items, function(appType){
+                if(appType.name) {
+                    appTypes.push(appType.name);
+                } else {
+                    if(ok) showAddendum(14, "Type is missing a \"name\": value definition");
+                    ok = false;
+                }
+            });
+        }
+        content += "<li>Types<ul>";
+        dojo.forEach(appTypes, function(appType){
+            content += "<li>" + appType + "</li>";
+        });
+        content += "</ul></li>";
+
+        content += "</ul>";
+
+        showResults(14, ok);
+        showAddendum(14, content);
+
+        if(ok) runTest15();
+    }
+
+    function runTest15() {
+        showTest(15, "Compare the gallery category and type definitions with the ArcGIS.com gallery");
+
+        var ok = true;
+
+        content = "<ol>";
+        dojo.forEach(gallery, function(item){
+            if(0 == item.tags.length) {
+                ok = false;
+                content += "<li>" + item.title + " is missing its category and type</li>";
+            } else if(2 != item.tags.length && 4 != item.tags.length) {
+                ok = false;
+                content += "<li>" + item.title + " has unexpected category and type values: \"" + item.tags.toString() + "\"; it should have either <ul>"
+                    + "<li><i>category</i>,<i>type</i></li>"
+                    + "<li><i>category</i>,<i>type</i>,<i>number</i>,<i>number</i></li>"
+                    + "</ul> where neither <i>category</i> nor <i>type</i> contains a comma (the <i>number</i> values are set by the application and hold the rating information--these should not be configured or modified)</li>";
+            } else {
+                content += "<li>" + item.title + " has<ul>";
+
+                var appCategory = item.tags[0].replace(/&amp;/g, "&");
+                content += "<li>category \"" + appCategory + "\"";
+                if(0 > dojo.indexOf(appCategories, appCategory)) {
+                    ok = false;
+                    content += "&nbsp;&nbsp;" + emphasize("Not in configuration");
+                }
+                content += "</li>";
+
+                var appType = item.tags[1].replace(/&amp;/g, "&");
+                content += "<li>type \"" + appType + "\"";
+                if(0 > dojo.indexOf(appTypes, appType)) {
+                    ok = false;
+                    content += "&nbsp;&nbsp;" + emphasize("Not in configuration");
+                }
+                content += "</li>";
+
+                if(4 == item.tags.length) {
+                    var sum = Number(item.tags[2]);
+                    var count = Number(item.tags[3]);
+                    if(isNaN(sum) || sum.toString() !== item.tags[2] || isNaN(count) || count.toString() !== item.tags[3]
+                        || (0 == count && 0 != sum) || 0 > count || 0 > sum) {
+                        ok = false;
+                        content += "<li>" + emphasize("rating information is damaged; please delete everything after the category and type") + "</li>";
+                    } else if(0 == count) {
+                        content += "<li>rating: <i>unrated</i></li>";
+                    } else {
+                        content += "<li>rating: " + (sum/count).toFixed(1) + " from "
+                            + count + " vote" + (1 != count?"s":"") + "</li>";
+                    }
+                } else {
+                    content += "<li>rating: <i>unrated</i></li>";
+                }
+                content += "</ul></li>";
+            }
+        });
+        content += "</ol>";
+
+        showResults(15, ok);
+        showAddendum(15, content);
+
+        if(ok) runTest16();
+    }
+
+    function runTest16() {
+        showTest(16, "Check the About page information");
+
+        if(!(configData.about && 0 < configData.about.length)) {
+            showResults(16, false);
+            showAddendum(16, "about must contain at least one category");
+        } else {
+            var item = dojo.byId("aboutPlaceholder");
+            if(item)
+            {
+                var contents = "";
+                dojo.forEach(configData.about, function(paragraph){
+                    contents += '<div class="aboutParagraph">' + paragraph.para + '</div>';
+                });
+                item.innerHTML = contents;
+            }
+            showResults(16, true);
+
+            runTest17();
+        }
+
+        addContactInfo("supportPlaceholder", configData.supportContact);
+        addContactInfo("additionalPlaceholder", configData.additionalContact);
+    }
+
+    function runTest17() {
+        showTest(17, "Check the languages information");
+
+        if(null === configData.displayRules.alternateLanguages || 0 == configData.displayRules.alternateLanguages.length) {
+            showResults(17, true);
+            showAddendum(17, "No language translation has been configured for this site");
+            runTest18();
+        } else {
+            var script = document.createElement("script");
+            script.src = "http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+            script.type = "text/javascript";
+            document.getElementsByTagName("head")[0].appendChild(script);
+
+            setTimeout(checkGoogleTranslateInstallation, 5000);
+        }
+
+        function checkGoogleTranslateInstallation() {
+            if(0 < dojo.byId("google_translate_element").innerHTML.length) {
+                showResults(17, true);
+                runTest18();
+            } else {
+                showResults(17, false);
+            }
+        }
+    }
+
+    function runTest18() {
+        showTest(18, "Check that the site can write to the Uploads directory");
+
+        dojo.xhrGet({
+            url: "checklist/testAccess.ashx?unique=" + (new Date()).getTime(),
+            handleAs: "text",
+            timeout: 10000,  // ms
+            load: function(data) {
+                if(data && "OK" == data) {
+                    showResults(18, true);
+                    runTest19();
+                } else {
+                    showResults(18, false);
+                }
+            },
+            error: function(text, xhr) {
+                showResults(18, false);
+                showAddendum(18, xhr.xhr.statusText);
+            }
+        });
+    }
+
+    function runTest19() {
+        showTest(19, "Check the logo and banner dimensions");
+
+        var content = "<ul>";
+        content += '<li>logo.png: <div id="logo19" class="imageDisplay"></div></li>';
+        content += '<li>home_image.png: <div id="home19" class="imageDisplay"></div></li>';
+        content += '<li>home_image.png stretches to fit width of page: ' + configData.displayRules.bannerImageStretchesToFit + '</li>';
+        content += '<li>startup_background.png: <div id="start19" class="imageDisplay"></div></li>';
+        content += "</ul>";
+        showAddendum(19, content);
+
+        var logoImg = dojo.create("img", {src:"configuration/logo.png"}, "logo19");
+        dojo.connect(logoImg, "onload", function(loadedLogo){
+            if(loadedLogo && 72 == loadedLogo.currentTarget.height) {
+
+                var bannerImg = dojo.create("img", {src:"configuration/home_image.png"}, "home19");
+                dojo.connect(bannerImg, "onload", function(loadedBanner){
+                    if(loadedBanner && 108 == loadedBanner.currentTarget.height) {
+
+                        var startImg = dojo.create("img", {src:"configuration/startup_background.png"}, "start19");
+                        dojo.connect(startImg, "onload", function(loadedStart){
+                            if(loadedStart) {
+                                showResults(19, true);
+                                showConclusion();
+                            } else {
+                                showResults(19, false);
+                                dojo.byId("start19").innerHTML = emphasize("Unable to load startup background image");
+                            }
+                        });
+                        dojo.connect(startImg, "onerror", function(err){
+                            showResults(19, false);
+                            dojo.byId("start19").innerHTML = emphasize("Unable to load startup background image");
+                        });
+
+                    } else {
+                        showResults(19, false);
+                        dojo.byId("home19").innerHTML = emphasize("Home banner image is not 108 pixels high");
+                    }
+                });
+                dojo.connect(bannerImg, "onerror", function(err){
+                    showResults(19, false);
+                    dojo.byId("home19").innerHTML = emphasize("Unable to load home banner image");
+                });
+
+            } else {
+                showResults(19, false);
+                dojo.byId("logo19").innerHTML = emphasize("Logo image is not 72 pixels high");
+            }
+        });
+        dojo.connect(logoImg, "onerror", function(err){
+            showResults(19, false);
+            dojo.byId("logo19").innerHTML = emphasize("Unable to load logo image");
+        });
+    }
+
+    function showConclusion() {
+        showTest(0, "Checklist testing is complete");
+        showResults(0, true);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------//
+
+    function testNavigation(testNum, navigationField, resultsPlaceholder) {
+        var ok = false;
+        if(!navigationField || null === navigationField.label || !navigationField.items) {
+            showResults(testNum, false);
+            showTip(testNum, "Check that the label field is a string, even if empty");
+            showTip(testNum, "Check that the items field is a list, even if empty");
+        } else {
+            showResults(testNum, true);
+            ok = true;
+
+            var content = navigationField.label;
+            var first = true;
+            var usingIcons = false;
+            dojo.forEach(navigationField.items, function(item){
+                if(!first && !usingIcons) content += ' | ';
+                if(item.link && 0 < item.link.length) {
+                    if(item.icon) {
+                        content += '<a target="_blank" class="iconPadSides" title="' + item.name +
+                            '" href="' + item.link + '"><img border="0" src="' + item.icon + '"></a> ';
+                        usingIcons = true;
+                    } else {
+                        content += '<a target="_blank" href="' + item.link + '">' + item.name + '</a> ';
+                    }
+                } else {
+                    content += item.name;
+                }
+                first = false;
+            });
+            dojo.byId(resultsPlaceholder).innerHTML = content;
+        }
+        return ok;
+    }
+
+    function patchFeedTitle(newsFeed, govtDisplayName)
+    {
+        var feedNode = newsFeed;
+        var title = govtDisplayName;
+        setTimeout(doPatchFeedTitle, 3000);
+        function doPatchFeedTitle() {
+            if(newsFeed.isLoaded){
+                newsFeed.titleNode.innerHTML = govtDisplayName;
+            }
+        }
+    }
+
+    function addContactInfo(id, contactData)
+    {
+        var item = dojo.byId(id);
+        if(item)
+        {
+            var contents = "";
+            if(contactData.text && 0 < contactData.text.length) contents += '<div>' + contactData.text + '</div>';
+            if(contactData.emailAddr && contactData.emailLabel &&
+                0 < contactData.emailAddr.length && 0 < contactData.emailLabel.length)
+            {
+                contents += '<div class="supportSubtitle">Email:</div>' +
+                    '<div><a href="' + contactData.emailAddr + '">' + contactData.emailLabel + '</a></div>';
+            }
+            if(contactData.phone && 0 < contactData.phone.length)
+            {
+                contents += '<div class="supportSubtitle">Phone:</div>' +
+                    '<div>' + contactData.phone + '</div>';
+            }
+            item.innerHTML = contents;
+        }
+    }
+
+    function googleTranslateElementInit() {
+        if(configData && null != configData.displayRules.alternateLanguages) {
+            var translateOptions = {
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            };
+            if(0 < configData.displayRules.alternateLanguages.length) {
+                translateOptions["includedLanguages"] = configData.displayRules.alternateLanguages;
+            }
+            new google.translate.TranslateElement(translateOptions, 'google_translate_element');
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------//
+
+    function showTest(testNum, purpose) {
+        dojo.removeClass(dojo.byId("results" + testNum), "hidden");
+        dojo.byId("resultsMsg" + testNum).innerHTML = purpose;
+    }
+
+    function showResults(testNum, isOK) {
+        dojo.byId("resultsIcon" + testNum).src = isOK? "graphics/ok.png" : "graphics/fail.png";
+    }
+
+    function showTip(testNum, message) {
+        showAddendum(testNum, "<i>" + message + "<i>");
+    }
+
+    function showAddendum(testNum, message) {
+        dojo.byId("resultsMsg" + testNum).innerHTML += "<br>" + message;
+    }
+
+    function emphasize(message) {
+        return "<span class=\"emphasizeProblem\">" + message + "</span>";
+    }
+
+</script>
+</body>
+</html>
