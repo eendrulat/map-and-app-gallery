@@ -1169,10 +1169,11 @@ than shifting the page 40px off the bottom. -->
 
                 // Create the thumbnail for this item
                 var newRotatorThumbCell = dojo.create("td", {}, rotatorThumbs);
+                var thumbSrc = items[i].thumbnail ? "proxy.ashx?" + items[i].thumbnail : "graphics/missingThumbnail.png";
                 var newRotatorThumb = dojo.create("img",
                     {
-                        src:"proxy.ashx?" + items[i].thumbnail,
-                        title:items[i].title
+                        src: thumbSrc,
+                        title: items[i].title
                     },
                     newRotatorThumbCell
                 );
@@ -1201,15 +1202,16 @@ than shifting the page 40px off the bottom. -->
                 });
 
                 // Create the large focus view for this item
+                var focusSrc = items[i].fullsize ? "proxy.ashx?" + items[i].fullsize : "graphics/missingThumbnail.png";
                 var rotatorFocusImg = dojo.create("img",
                     {
-                        src: "proxy.ashx?" + items[i].fullsize,
+                        src: focusSrc,
                         title: "More information about " + items[i].title
                     }, rotatorFocusImgCell);
                 rotatorFocusImg.onerrorHandle = dojo.connect(rotatorFocusImg, "onerror", function(err){
                     var affectedImage = err.currentTarget;
                     dojo.disconnect(affectedImage.onerrorHandle);
-                    affectedImage.src = "graphics/missingMostRecent.png";
+                    affectedImage.src = thumbSrc;
                 });
                 mostRecentItems[i].focusImg = rotatorFocusImg;
 
@@ -1370,6 +1372,7 @@ than shifting the page 40px off the bottom. -->
                             }
 
                             // Create the tile
+                            var thumbSrc = galleryItem.thumbnail ? "proxy.ashx?" + galleryItem.thumbnail : "graphics/missingThumbnail.png";
                             var mapapptile = new local.modules.MapsAppsTile({
                                 id: galleryItem.id,
                                 titleLine: galleryItem.title,
@@ -1377,7 +1380,7 @@ than shifting the page 40px off the bottom. -->
                                 shortDesc: galleryItem.snippet,
                                 readMoreOnClickHandler: "showDetailsDialog",
                                 tryItURL: galleryItem.url,
-                                thumbnailURL: "proxy.ashx?" + galleryItem.thumbnail
+                                thumbnailURL: thumbSrc
                             });
                             gallery.addChild(mapapptile);
                             ++numMapsAndApps;

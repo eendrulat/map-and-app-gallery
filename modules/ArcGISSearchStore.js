@@ -49,10 +49,15 @@ dojo.declare("local.modules.ArcGISSearchStore", null, {
             dojo.forEach(items, function(item) {
                 item[storeObject._storeRef] = storeObject;
                 var imageFilename = item["thumbnail"];
-                item["thumbnail"] = "http://www.arcgis.com/sharing/content/items/" + item["id"] + "/info/" + imageFilename;
-                var filenamePieces = imageFilename.split(".");
-                imageFilename = filenamePieces[0] + "_orig." + filenamePieces[1];
-                item["fullsize"] = "http://www.arcgis.com/sharing/content/items/" + item["id"] + "/info/" + imageFilename;
+                if(imageFilename) {
+                    item["thumbnail"] = "http://www.arcgis.com/sharing/content/items/" + item["id"] + "/info/" + imageFilename;
+                    var filenamePieces = imageFilename.split(".");
+                    imageFilename = filenamePieces[0] + "_orig." + filenamePieces[1];
+                    item["fullsize"] = "http://www.arcgis.com/sharing/content/items/" + item["id"] + "/info/" + imageFilename;
+                } else {
+                    item["thumbnail"] = null;
+                    item["fullsize"] = null;
+                }
             });
         }
         return items;
