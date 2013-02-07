@@ -1,6 +1,6 @@
 # map-and-app-gallery
 
-The Local Government Maps and Apps Gallery is a configurable web application that provides citizens access to maps and apps you have developed for your local government and cataloged in ArcGIS.com. The maps and apps are organized into a gallery around information and services citizens need to do business with cities, counties, and other local governments. This application is typically deployed on-premises and is accessible from your local government’s web site.
+The Local Government Maps and Apps Gallery is a configurable web application that provides citizens access to maps and apps you have developed for your local government and cataloged in ArcGIS.com. The maps and apps are organized into a gallery around information and services citizens need to do business with cities, counties, and other local governments. This application is typically deployed on-premises and is accessible from your local governmentï¿½s web site.
 
 [Try the Maps and Apps Gallery application](http://localgovtemplates2.esri.com/MapsAndApps/)
 
@@ -66,3 +66,6 @@ limitations under the License.
 
 A copy of the license is available in the repository's
 [license.txt](https://raw.github.com/Esri/map-and-app-gallery/master/license.txt) file.
+
+[](Esri Tags: Local Government map app gallery)
+[](Esri Language: JavaScript)
