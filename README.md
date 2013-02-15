@@ -69,5 +69,5 @@ limitations under the License.
 A copy of the license is available in the repository's
 [license.txt](https://raw.github.com/Esri/map-and-app-gallery/master/license.txt) file.
 
-[](Esri Tags: Local Government map app gallery)
+[](Esri Tags: Local Government Map App Gallery)
 [](Esri Language: JavaScript)
